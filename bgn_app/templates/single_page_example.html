@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <!--Import Google Icon Font-->
+    <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!--Import materialize.css-->
+    <link type="text/css" rel="stylesheet" href="materialize/css/materialize.min.css"  media="screen,projection"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+    <!--Let browser know website is optimized for mobile-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.3/angular.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.3/angular-animate.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.3/angular-aria.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angular_material/0.10.0/angular-material.min.js"></script>    <!-- Google maps -->
+    <style>
+      #map {
+        width: 100%;
+        height: 525px;
+      }
+      html {
+        font-weight: 200;
+      }
+      a {
+        color: white;
+      }
+      body {
+        background-color: #757171;
+      }
+      .icon_hover i.hover_hide {
+        visibility:hidden;
+      }
+      .icon_hover:hover i.hover_hide {
+       visibility:visible;
+      }
+      .side-nav.fixed a {
+        color: white;
+      }
+      .side-nav.fixed li:first-of-type:hover {
+        background: #524E4E;
+      }
+    </style>
+    <script src="https://maps.googleapis.com/maps/api/js"></script>
+    <script>
+      function initialize() {
+        var mapCanvas = document.getElementById('map');
+        // users location will be given here
+        var userLocation = new google.maps.LatLng(60.1733244, 24.9410248);
+        var mapOptions = {
+          center: userLocation,
+          zoom: 13,
+          mapTypeId: google.maps.MapTypeId.ROADMAP,
+        };
+        var map = new google.maps.Map(mapCanvas, mapOptions);
+
+        map.set('styles', [
+          {
+            stylers: [
+              { hue: "#ee6e73" },
+              { saturation: -20 }
+            ]
+          },
+          {
+            featureType: 'road',
+            elementType: 'geometry',
+            stylers: [
+              { lightness: 100 },
+              { visibility: "simplified" }
+            ]
+          }, {
+            featureType: 'road',
+            elementType: 'labels',
+            stylers: [
+              { saturation: -100 },
+              { invert_lightness: true }
+            ]
+          }, {
+            featureType: 'landscape',
+            elementType: 'geometry',
+            stylers: [
+              { hue: "#524E4E" },
+              { saturation: 10 },
+              { lightness: -20 },
+              { gamma: 1.51 }
+            ]
+          }, {
+            featureType: "road",
+            elementType: "labels",
+            stylers: [
+              { visibility: "off" }
+            ]
+          }
+        ]);
+
+        // Specify location, radius and place types for your Places API search.
+        // eg.
+
+        // var request = {
+        //   location: userLocation,
+        //   radius: '500',
+        //   types: ['store']
+        // };
+
+        // Create the PlaceService and send the request.
+        // Handle the callback with an anonymous function.
+        // var service = new google.maps.places.PlacesService(map);
+        // service.nearbySearch(request, function(results, status) {
+        //   if (status == google.maps.places.PlacesServiceStatus.OK) {
+        //     for (var i = 0; i < results.length; i++) {
+        //       var place = results[i];
+        //       // If the request succeeds, draw the place location on
+        //       // the map as a marker, and register an event to handle a
+        //       // click on the marker.
+        //       var marker = new google.maps.Marker({
+        //         map: map,
+        //         position: place.geometry.location
+        //       });
+        //     }
+        //   }
+        // });
+      }
+      google.maps.event.addDomListener(window, 'load', initialize);
+    </script>
+  </head>
+
+  <body>
+    <!--Import jQuery before materialize.js-->
+    <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+    <script type="text/javascript" src="materialize/js/materialize.min.js"></script>
+
+    <!-- Top navigation panel -->
+    <div class="row">
+      <nav class="top-nav fixed" >
+        <div class="nav-wrapper col s12 z-depth-1" style="background-color: #FF5A6A">
+          <div class="container" style="width: 98%;">
+            <img src="dice_icon.png" style="height: 57px; width: 52px; margin: 3px 8px 3px 0px;">
+            <a href="#" class="brand-logo"> BGN</a>
+            <ul id="nav-mobile" class="right hide-on-med-and-down">
+              <li>
+                <form>
+                  <div class="input-field">
+                    <input id="search" type="search" style="margin-bottom: 0px;" required>
+                    <label for="search"><i class="material-icons">search</i></label>
+                    <i class="material-icons">close</i>
+                  </div>
+                </form>
+              </li>
+              <li><a href="">logout<i class="material-icons right">input</i></a></li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+    </div>
+
+    <!-- Side navigation panel -->
+    <div class="row">
+      <div class="col s2">
+        <ul id="slide-out" class="side-nav fixed" style="top:64px; width: 208px; background-color: #524E4E;">
+          <li>
+            <div class="section" style="width: 175px; text-align: center;">
+              <span class="center icon_hover"><h5 style="color: white; font-weight: 200; display: inline; margin: 5px;">Annika Oukka</h5><i class="fa fa-pencil-square-o hover_hide pull-right" style="color: white;"></i></span>
+              <img src="profile_pic.png" alt="" style="margin-top: 13px;" class="circle responsive-img">
+              <a href="" style="color:white;"><i class="material-icons">location_on</i>Helsinki, Finland</a>
+            </div>
+          </li>
+          <li class="bold"><a href="" class="waves-effect waves-teal"><i class="fa fa-calendar"></i> Events</a></li>
+          <li class="bold"><a href="" class="waves-effect waves-teal"><i class="fa fa-puzzle-piece"></i> Games</a></li>
+          <li class="bold"><a href="" class="waves-effect waves-teal"><i class="fa fa-users"></i> Friends</a></li>
+        </ul>
+      </div>
+    <!-- Teal page content  -->
+      <div class="col s9 offset-s2">
+        <div id="map"></div>
+      </div>
+    </div>
+  </body>
+</html>
