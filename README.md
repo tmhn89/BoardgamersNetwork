@@ -27,5 +27,10 @@ Some git commands:
     [ git checkout -b <branch-name> ]               -> create new branch
     [ git merge <branch-name> ]                     -> merge current branch with the code from other branch
 
+4. Move the modified files to another branches
+    [ git stash ]                                   -> take the modified files to a "temporary storage"
+    [ git checkout <branch-name> ]                  -> swtich into another branch
+    [ git stash pop ]                               -> put the modified from stash to the current branch
+
 
 (NOTES: Pulling code before modifying files & pushing to avoid error)
