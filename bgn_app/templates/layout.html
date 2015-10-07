@@ -1,9 +1,12 @@
 <!DOCTYPE html>
+{% load staticfiles %}
 <html>
   <head>
     <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <!--Import materialize.css-->
-    <link type="text/css" rel="stylesheet" href="materialize/css/materialize.min.css"  media="screen,projection"/>
+    <link type="text/css" rel="stylesheet" href="{% static 'materialize/css/materialize.min.css' %}"  media="screen,projection"/>
+    <!-- <link type="text/css" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.1/css/materialize.min.css"  media="screen,projection"/> -->
+
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
     <!--Let browser know website is optimized for mobile-->
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
@@ -11,6 +14,9 @@
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.3/angular-animate.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.3/angular-aria.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angular_material/0.10.0/angular-material.min.js"></script>    <!-- Google maps -->
+    <!--Import materialize.js-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.1/js/materialize.min.js"></script>          
+
     <style>
       #map {
         width: 100%;
@@ -91,16 +97,16 @@
   </head>
 
   <body class="body">
-    {% load staticfiles %}
+    
     <!-- Top navigation panel -->
     <div class="row">
-      {% block nav %}{% include "top_navigation.html" %}{% endblock %}
+      {% block top_nav %}{% include "top_navigation.html" %}{% endblock %}
     </div>
 
     <div class="row">
       <!-- Side navigation panel -->
       <div class="col s2">
-        {% block nav %}{% include "side_navigation.html" %}{% endblock %}
+        {% block side_nav %}{% include "side_navigation.html" %}{% endblock %}
       </div>
 
       <!-- All changing page content  -->

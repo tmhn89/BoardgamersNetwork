@@ -1,0 +1,31 @@
+{% extends "layout.html" %}
+
+{% block content %}
+
+{% if users %}
+  <h3 class="white-text">All Users</h3>
+  <table class="white-text">
+    <thead>
+      <th>
+        <th>Name</th>
+        <th>Image</th>
+        <th>Email</th>
+        <th>Location</th>
+      </th>
+    </thead>
+    <tbody>
+    {% for user in users %}
+      <tr>
+        <td>{{ user.name }}</td>
+        <td><img src="{{ user.img_url }}" height="50" /></td>
+        <td>{{ user.email }}</td>
+        <td>{{ user.location }}</td>
+      </tr>
+    {% endfor %}
+    </tbody>
+  </table>
+{% else %}
+  No user....
+{% endif %}
+
+{% endblock %}

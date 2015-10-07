@@ -15,10 +15,14 @@ Including another URLconf
 """
 from django.conf.urls import include, url
 from django.contrib import admin
-from bgn_app.views import get_list_of_friends
+from django.contrib.staticfiles.urls import staticfiles_urlpatterns
+
+from bgn_app.views import *
 
 urlpatterns = [
     url(r'^friends/', get_list_of_friends, name="friends"),
+    url(r'^users/', users, name="users"),
     # url(r'^admin/', include(admin.site.urls)),
-
 ]
+
+urlpatterns += staticfiles_urlpatterns()
