@@ -37,14 +37,14 @@ class Migration(migrations.Migration):
             name='GameTags',
             fields=[
                 ('id', models.AutoField(primary_key=True, serialize=False)),
-                ('game_id', models.ForeignKey(to='start.Game')),
+                ('game_id', models.ForeignKey(to='bgn_app.Game')),
             ],
         ),
         migrations.CreateModel(
             name='Participants',
             fields=[
                 ('id', models.AutoField(primary_key=True, serialize=False)),
-                ('event_id', models.ForeignKey(to='start.Event')),
+                ('event_id', models.ForeignKey(to='bgn_app.Event')),
             ],
         ),
         migrations.CreateModel(
@@ -67,31 +67,31 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='participants',
             name='user_id',
-            field=models.ForeignKey(to='start.User'),
+            field=models.ForeignKey(to='bgn_app.User'),
         ),
         migrations.AddField(
             model_name='gametags',
             name='tag_id',
-            field=models.ForeignKey(to='start.Tag'),
+            field=models.ForeignKey(to='bgn_app.Tag'),
         ),
         migrations.AddField(
             model_name='event',
             name='host',
-            field=models.ForeignKey(to='start.User'),
+            field=models.ForeignKey(to='bgn_app.User'),
         ),
         migrations.AddField(
             model_name='event',
             name='main_game',
-            field=models.ForeignKey(to='start.Game'),
+            field=models.ForeignKey(to='bgn_app.Game'),
         ),
         migrations.AddField(
             model_name='collection',
             name='game_id',
-            field=models.ForeignKey(to='start.Game'),
+            field=models.ForeignKey(to='bgn_app.Game'),
         ),
         migrations.AddField(
             model_name='collection',
             name='user_id',
-            field=models.ForeignKey(to='start.User'),
+            field=models.ForeignKey(to='bgn_app.User'),
         ),
     ]

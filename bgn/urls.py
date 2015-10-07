@@ -15,7 +15,10 @@ Including another URLconf
 """
 from django.conf.urls import include, url
 from django.contrib import admin
+from bgn_app.views import get_list_of_friends
 
 urlpatterns = [
-    url(r'^admin/', include(admin.site.urls)),
+    url(r'^friends/', get_list_of_friends, name="friends"),
+    # url(r'^admin/', include(admin.site.urls)),
+
 ]
