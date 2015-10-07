@@ -1,0 +1,21 @@
+{% extends "layout.html" %}
+
+{% block content %}
+
+<div id="friends" ng-controller="FriendsListController">
+  <h2>Friends</h2>
+
+
+  <ul>
+    <li ng-repeat="f in friends.output">
+      <p>{{ f.name }}</p>
+      <p>{{ f.location }}</p>
+
+      <button ng-click="">Add</button>
+      <button ng-click="">X</button>
+    </li>
+    <li><button ng-click="">add</button></li>
+  </ul>
+</div>
+
+{% endblock %}
