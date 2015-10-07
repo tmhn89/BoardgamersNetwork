@@ -36,29 +36,13 @@ class User(models.Model):
         from_people__to_person=self)
 
 
-# Represent Game entity
-class Game(models.Model):
-  id          = models.AutoField(primary_key = True)
-  name        = models.CharField(max_length = 200)
-  player_min  = models.IntegerField()
-  player_max  = models.IntegerField()
-
-# Represent the n-n relationship between User & Game
+# Represent the n-n relationship between User & Game. Game_id fetch from Boardgamegeek API
 class Collection(models.Model):
   id          = models.AutoField(primary_key = True)
   user        = models.ForeignKey(User)
-  game        = models.ForeignKey(Game)
-
-# Represent Tags for Games
-class Tag(models.Model):
-  id          = models.AutoField(primary_key = True)
-  name        = models.CharField(max_length = 200)
-
-# Represent the n-n relationship between Game & Tags
-class GameTags(models.Model):
-  id          = models.AutoField(primary_key = True)
-  game        = models.ForeignKey(Game)
-  tag         = models.ForeignKey(Tag)
+  game_id     = models.CharField(max_length = 200, blank = True)
+  # make sure that user & game_id pair is unique in the database
+  unique_together = ("user", "game_id")
 
 # Represent the game Event entity
 class Event(models.Model):
@@ -66,7 +50,7 @@ class Event(models.Model):
   venue       = models.CharField(max_length = 200)
   time        = models.DateTimeField()
   host        = models.ForeignKey(User)
-  main_game   = models.ForeignKey(Game)
+  main_game   = models.CharField(max_length = 200)
   description = models.TextField()
 
 # Represent the n-n relationship between Event & User
