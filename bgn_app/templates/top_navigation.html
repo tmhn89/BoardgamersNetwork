@@ -1,21 +1,23 @@
 {% load staticfiles %}
-<nav class="top-nav fixed" >
-  <div class="nav-wrapper col s12 z-depth-1" style="background-color: #FF5A6A">
-    <div class="container" style="width: 98%;">
-      <img src="{% static 'dice_icon.png' %}" style="height: 57px; width: 52px; margin: 3px 8px 3px 0px;">
-      <a href="#" class="brand-logo"> BGN</a>
-      <ul id="nav-mobile" class="right hide-on-med-and-down">
-        <li>
-          <form>
-            <div class="input-field">
-              <input id="search" type="search" style="margin-bottom: 0px;" required>
-              <label for="search"><i class="material-icons">search</i></label>
-              <i class="material-icons">close</i>
-            </div>
-          </form>
-        </li>
-        <li><a href="">logout<i class="material-icons right">input</i></a></li>
-      </ul>
+<div class="navbar-fixed">
+  <nav class="top-nav fixed" >
+    <div class="nav-wrapper col s12 z-depth-1" style="background-color: #FF5A6A">
+      <div class="container" style="width: 98%;">
+        <img src="{% static 'dice_icon.png' %}" style="height: 57px; width: 52px; margin: 3px 8px 3px 0px;">
+        <a href="#" class="brand-logo"> BGN</a>
+        <ul id="nav-mobile" class="right hide-on-med-and-down">
+          <li>
+            <form>
+              <div class="input-field">
+                <input id="search" type="search" style="margin-bottom: 0px;" required>
+                <label for="search"><i class="material-icons">search</i></label>
+                <i class="material-icons">close</i>
+              </div>
+            </form>
+          </li>
+          <li><a href="">logout<i class="material-icons right">input</i></a></li>
+        </ul>
+      </div>
     </div>
-  </div>
-</nav>
+  </nav>
+</div>

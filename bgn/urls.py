@@ -22,6 +22,7 @@ from bgn_app.views import *
 urlpatterns = [
     url(r'^friends/', get_list_of_friends, name="friends"),
     url(r'^users/', users, name="users"),
+    url(r'^games/', games, name="games"),
     # url(r'^admin/', include(admin.site.urls)),
 ]
 

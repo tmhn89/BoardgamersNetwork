@@ -2,6 +2,10 @@ from django.shortcuts import render
 from django.http import HttpResponse
 from django.template import RequestContext, loader
 
+import requests
+import xml.etree.ElementTree as ET
+import xmltodict
+
 from .models import *
 
 # Class for listing user's friends
@@ -40,3 +44,24 @@ def users(request):
     })
 
     return HttpResponse(template.render(context))
+
+def games(request):
+    # games = User.objects.order_by('-name')[:3]
+
+    template = loader.get_template('games.html')
+    # context = RequestContext(request, {
+    #     'games': games,
+    # })
+    # print(context)
+    r = requests.get('https://www.boardgamegeek.com/xmlapi/collection/irkinvader')
+    #print(r.text)
+    data = xmltodict.parse(r.text)
+    #tree = ET.parse(r.text)
+    #root = tree.getroot()
+    #print(tree)
+    context = RequestContext(request, {
+        'games': data
+    })
+
+    return HttpResponse(template.render(context))
+
