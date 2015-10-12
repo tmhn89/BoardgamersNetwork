@@ -6,7 +6,7 @@ from .models import User
 
 
 @login_required
-def list_of_friends(self, request, user_id):
+def get_list_of_friends(self, request, user_id):
     """
     Lists user's friends
     """
@@ -66,7 +66,7 @@ def remove_friend(self, request, user_id, friend):
     user.remove_friendship(friend)
 
 
-def get_users(request):
+def users(request):
     users = User.objects.order_by('-name')[:5]
 
     # output = "<table>"
