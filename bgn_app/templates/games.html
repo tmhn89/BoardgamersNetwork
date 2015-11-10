@@ -1,0 +1,30 @@
+{% extends "layout.html" %}
+
+{% block content %}
+<h3 class="white-text">Games</h3>
+{% if games %}
+  
+ <div id="masonry-grid" class="row"> 
+  {% for game in games.items.item %}
+  <div class="col s3">
+    <div class="card">
+      <div class="card-image">
+        <img src="{{ game.image }}">
+        <span class="card-title">{{ game.name.text }}</span>
+      </div>
+      <div class="card-content">
+        <p>{{ game.yearpublished }}</p>
+      </div>
+      <div class="card-action">
+        <a href="#"></a>
+      </div>
+    </div>
+  </div>
+    
+  {% endfor %}
+</div>
+{% else %}
+  No user....
+{% endif %}
+
+{% endblock %}

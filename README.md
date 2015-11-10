@@ -3,14 +3,20 @@ Repository for the project of "Design of WWW Services" course
 
 ### Changelogs
 
-##### 3/11/2015 - Ninh
+##### 10/11/2015
+- Merge fea_map_makers into dev
+- Merge fea_games into dev. install the following:
+    - pip install requests
+    - pip install xmltodict
+
+##### 3/11/2015
 
 - Update model as discussed on Nov 2nd
     - remove friendship
     - add guild
     - change location stored from string to lat & long
 
-##### 8/10/2015 - Ninh
+##### 8/10/2015
 
 - Add all users view. Accessible from `http://localhost:8000/users` (if you use port 8000 for server)
 - Fix project structure for static files (including css, js, images)
