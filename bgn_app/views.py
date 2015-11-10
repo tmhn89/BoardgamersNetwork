@@ -2,34 +2,46 @@ from django.http import HttpResponse
 from django.shortcuts import render_to_response
 from django.template import RequestContext, loader
 from django.contrib.auth.decorators import login_required
-from .models import User
+from django.core.serializers import serialize
+from .models import User, Event
+import json as simplejson
 
 
-@login_required
-def get_list_of_friends(self, request, user_id):
-    """
-    Lists user's friends
-    """
-    user = User.objects.get(id=request.user_id)
-    # user should be stored in request
-    # user = request.user
-    user_friends = user.get_friends()
-    resp = []
-    for f in user_friends:
-        friend = {
-            'name': f.name,
-            'location': f.location,
-            'image': f.img_url
-        }
-        self.resp.append(friend)
+def event(self):
 
-    # resp friend_list = [{'name': 'Annika Oukka', 'location': 'Espoo',
-    # 'image': 'http://....'}, {'name': '',..}, {..}]
+    data = [
+        {
+            'name': 'GameDay',
+            'coordinates': [60.186455, 24.837126],
+            'address': 'Jamerantaival 1',
+            'image_url': 'https://theromanticvineyard.files.wordpress.com/2013/01/clue-board.jpg',
+            'attendee_count': 9,
+            'description': 'Lorem ipsum dolor sit amet, non numquam proinmae.'
+        },
+        {
+            'name': 'Otaniemi Gaming Night',
+            'coordinates': [60.186555, 24.837138],
+            'address': 'Otakaari 20',
+            'image_url': 'http://d1mvvfdyo8jq4k.cloudfront.net/media/susd/images/2013/7/28/c6138082f7ce11e28594f23c91709c91_1375047823.jpg',
+            'attendee_count': 16,
+            'description': 'Lorem ipsum dolor sit amet, non numquam proinmae.'
+        },
+        {
+            'name': 'Dominion',
+            'coordinates': [60.186457, 24.837121],
+            'address': 'Konemiehentie 1',
+            'image_url': 'http://thisisinfamous.com/wp-content/uploads/2014/06/dominion-1.jpg',
+            'attendee_count': 4,
+            'description': 'Lorem ipsum dolor sit amet, non numquam proinmae.'
+        },
+    ]
+
     return render_to_response(
-        'templates/friends/list_friends.html', {
-            'friend_list': resp
+        'location/map.html', {
+            'events': data
         }
     )
+
 
 @login_required
 def list_of_user_matches(self, request, user_id):
@@ -44,27 +56,6 @@ def list_of_user_matches(self, request, user_id):
     #     }
     # )
     pass
-
-
-@login_required
-def add_friend(self, request, user_id, friend):
-    """
-    Add friend to user
-    """
-    user = User.objects.get(id=request.user_id)
-    # replace above with user = request.user
-    user.add_friend(friend)
-
-
-@login_required
-def remove_friend(self, request, user_id, friend):
-    """
-    Remove friend from user
-    """
-    user = User.objects.get(id=request.user_id)
-    # replace above with user = request.user
-    user.remove_friendship(friend)
-
 
 def users(request):
     users = User.objects.order_by('-name')[:5]
