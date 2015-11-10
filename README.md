@@ -3,6 +3,13 @@ Repository for the project of "Design of WWW Services" course
 
 ### Changelogs
 
+##### 3/11/2015 - Ninh
+
+- Update model as discussed on Nov 2nd
+    - remove friendship
+    - add guild
+    - change location stored from string to lat & long
+
 ##### 8/10/2015 - Ninh
 
 - Add all users view. Accessible from `http://localhost:8000/users` (if you use port 8000 for server)

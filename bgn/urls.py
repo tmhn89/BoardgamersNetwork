@@ -20,9 +20,9 @@ from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 from bgn_app.views import *
 
 urlpatterns = [
-    url(r'^friends/', get_list_of_friends, name="friends"),
+    #url(r'^friends/', get_list_of_friends, name="friends"),
     url(r'^users/', users, name="users"),
-    # url(r'^admin/', include(admin.site.urls)),
+    url(r'^admin/', include(admin.site.urls)),
 ]
 
 urlpatterns += staticfiles_urlpatterns()
