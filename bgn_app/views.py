@@ -16,7 +16,7 @@ def event(self):
     data = [
         {
             'name': 'GameDay',
-            'coordinates': [60.186455, 24.837126],
+            'coordinates': [60.18775, 24.82846],
             'address': 'Jamerantaival 1',
             'image_url': 'https://theromanticvineyard.files.wordpress.com/2013/01/clue-board.jpg',
             'attendee_count': 9,
@@ -24,7 +24,7 @@ def event(self):
         },
         {
             'name': 'Otaniemi Gaming Night',
-            'coordinates': [60.186555, 24.837138],
+            'coordinates': [60.18345, 24.78526],
             'address': 'Otakaari 20',
             'image_url': 'http://d1mvvfdyo8jq4k.cloudfront.net/media/susd/images/2013/7/28/c6138082f7ce11e28594f23c91709c91_1375047823.jpg',
             'attendee_count': 16,
@@ -32,7 +32,7 @@ def event(self):
         },
         {
             'name': 'Dominion',
-            'coordinates': [60.186457, 24.837121],
+            'coordinates': [60.16899, 24.94938],
             'address': 'Konemiehentie 1',
             'image_url': 'http://thisisinfamous.com/wp-content/uploads/2014/06/dominion-1.jpg',
             'attendee_count': 4,
@@ -45,7 +45,6 @@ def event(self):
             'events': data
         }
     )
-
 
 @login_required
 def list_of_user_matches(self, request, user_id):
@@ -127,7 +126,7 @@ def guild_detail(request):
     }
     template = loader.get_template('guild_detail.html')
     data = guild_info;
-    context = RequestContext(request, { 
+    context = RequestContext(request, {
         'guild_detail': data,
         'guild_members': guild_member,
         'guild_events': guild_event,
@@ -148,7 +147,7 @@ def event_detail(request):
     }
     template = loader.get_template('event_detail.html')
     data = event_info;
-    context = RequestContext(request, { 
+    context = RequestContext(request, {
         'event_detail': data
     })
 

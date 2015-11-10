@@ -3,7 +3,6 @@ $( document ).ready(function() {
     function initialize() {
     // Function for initalizing map on the page
 
-
         // Define where the map will be loaded
         var mapCanvas = document.getElementById('map');
 
@@ -15,7 +14,6 @@ $( document ).ready(function() {
             mapTypeId: google.maps.MapTypeId.ROADMAP,
         };
         var map = new google.maps.Map(mapCanvas, mapOptions);
-
 
         // Edit styles for map
         map.set('styles', [
@@ -57,30 +55,26 @@ $( document ).ready(function() {
             }
         ]);
 
+        function addMarker(map, name, latlng){
+            var infoWin = new google.maps.InfoWindow({content: name});
+            var marker = new google.maps.Marker({
+                map: map,
+                position: latlng,
+                title: name,
+            });
+            google.maps.event.addListener(marker, 'click', function(){
+                infoWin.open(map, marker);
+            });
+        }
 
-        // add some markers on the map
-        var myCenter = new google.maps.LatLng(60.187058, 24.834908);
-        var OneEvent = new google.maps.LatLng(60.186797, 24.833648);
-        var AnotherEvent =  new google.maps.LatLng(60.187331, 24.823403);
+        // add markers on the map
+        for (var event_key in dict) {
+            event_name = event_key;
+            event_coordinates = dict[event_key];
+            var latlng = new google.maps.LatLng(event_coordinates[0], event_coordinates[1]);
+            addMarker(map, event_name, latlng);
+        }
 
-        var marker = new google.maps.Marker({
-            position: myCenter,
-            map: map,
-            title: 'Event!',
-            // icon: 'http://i.imgur.com/ktFR7U8.png'
-        });
-        var marker1 = new google.maps.Marker({
-            position: OneEvent,
-            map: map,
-            title: 'Event!',
-            // icon: 'http://i.imgur.com/ktFR7U8.png'
-        });
-        var marker2 = new google.maps.Marker({
-            position: AnotherEvent,
-            map: map,
-            title: 'Event!',
-            // icon: 'http://i.imgur.com/ktFR7U8.png'
-        });
     }
 
 
