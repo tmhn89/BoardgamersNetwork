@@ -24,6 +24,7 @@ urlpatterns = [
     url(r'^users/', users, name="users"),
     url(r'^games/', games, name="games"),
     url(r'^guild_detail/', guild_detail, name="guild_detail"),
+    url(r'^event_detail/', event_detail, name="event_detail"),
     # url(r'^admin/', include(admin.site.urls)),
 ]
 

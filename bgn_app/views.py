@@ -97,3 +97,20 @@ def guild_detail(request):
 
     return HttpResponse(template.render(context))
 
+def event_detail(request):
+    event_info ={
+        'name':'EVENT name',
+        'description':'this is just an example description.this is just an example description.this is just an example description.this is just an example description.this is just an example description.this is just an example description.this is just an example description.',
+        'game_list':'example games',
+        'host':'john doe',
+        'contact_info':'blabla',
+        'image':'blabla',
+        'participants_list':[1,2,3,4,5],
+    }
+    template = loader.get_template('event_detail.html')
+    data = event_info;
+    context = RequestContext(request, { 
+        'event_detail': data
+    })
+
+    return HttpResponse(template.render(context))
