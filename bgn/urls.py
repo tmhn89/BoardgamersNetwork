@@ -19,8 +19,10 @@ from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 from bgn_app.views import *
 
 urlpatterns = [
+    #url(r'^friends/', get_list_of_friends, name="friends"),
     url(r'^event/', event, name="event"),
     url(r'^users/', users, name="users"),
+    url(r'^admin/', include(admin.site.urls)),
     url(r'^games/', games, name="games"),
     url(r'^guild_detail/', guild_detail, name="guild_detail"),
     url(r'^event_detail/', event_detail, name="event_detail"),
