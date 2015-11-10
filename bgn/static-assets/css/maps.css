@@ -1,0 +1,22 @@
+#map {
+  width: 100%;
+  height: 525px;
+}
+html {
+  font-weight: 200;
+}
+a {
+  color: white;
+}
+body {
+  background-color: #757171;
+}
+.icon_hover i.hover_hide {
+  visibility:hidden;
+}
+.icon_hover:hover i.hover_hide {
+ visibility:visible;
+}
+.side-nav.fixed a {
+  color: white;
+}

@@ -1,0 +1,36 @@
+{% extends "layout.html" %}
+{% load staticfiles %}
+{% block title %} Location {% endblock %}
+{% block content %}
+
+<script src="https://maps.googleapis.com/maps/api/js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+
+{% if events %}
+
+<div class="events"><h5 style="color:white;font-weight: 200;">Events</h5></div>
+  <div id="map">events</div>
+  <div class="row">
+  {% for event in events %}
+    <div class="col s12 m6">
+      <div class="card small blue-grey darken-1">
+        <div class="card-image">
+          <img src="{{ event.image_url }}">
+          <span class="card-title">{{ event.name }}</span>
+        </div>
+        <div class="card-content white-text">
+          <p>{{ event.address }}</p>
+          <p>{{ event.attendee_count}} people going</p>
+        </div>
+        <div class="card-action">
+          <a href="#">Join event</a>
+          <a href="#">See event details</a>
+        </div>
+      </div>
+    </div>
+  {% endfor %}
+</div>
+{% endif %}
+<script  type="text/javascript" src="{% static 'js/maps.js' %}"></script>
+<link rel="stylesheet" type="text/css" href="{% static 'css/maps.css' %}">
+{% endblock %}

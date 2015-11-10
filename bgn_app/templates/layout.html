@@ -6,6 +6,7 @@
     <!--Import materialize.css-->
     <link type="text/css" rel="stylesheet" href="{% static 'materialize/css/materialize.min.css' %}"  media="screen,projection"/>
     <!-- <link type="text/css" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.1/css/materialize.min.css"  media="screen,projection"/> -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
     <!--Let browser know website is optimized for mobile-->
@@ -14,94 +15,15 @@
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.3/angular.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.3/angular-animate.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.3/angular-aria.min.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/angular_material/0.10.0/angular-material.min.js"></script>    <!-- Google maps -->
+    <script src="https://ajax.googleapis.com/ajax/libs/angular_material/0.10.0/angular-material.min.js"></script>
     <!--Import materialize.js-->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.1/js/materialize.min.js"></script>   
     <script src="{% static 'js/masonry.pkgd.min.js' %}"></script> 
-    <script src="{% static 'js/init.js' %}"></script>   
 
-
-    <style>
-      #map {
-        width: 100%;
-        height: 525px;
-      }
-      html {
-        font-weight: 200;
-      }
-      a {
-        color: white;
-      }
-      body {
-        background-color: #757171;
-      }
-      .icon_hover i.hover_hide {
-        visibility:hidden;
-      }
-      .icon_hover:hover i.hover_hide {
-       visibility:visible;
-      }
-      .side-nav.fixed a {
-        color: white;
-      }
-    </style>
-    <script src="https://maps.googleapis.com/maps/api/js"></script>
-    <script>
-      function initialize() {
-        var mapCanvas = document.getElementById('map');
-        var mapOptions = {
-          center: new google.maps.LatLng(44.5403, -78.5463),
-          zoom: 10,
-          mapTypeId: google.maps.MapTypeId.ROADMAP,
-        }
-        var map = new google.maps.Map(mapCanvas, mapOptions)
-
-
-        map.set('styles', [
-          {
-            stylers: [
-              { hue: "#ee6e73" },
-              { saturation: -20 }
-            ]
-          },
-          {
-            featureType: 'road',
-            elementType: 'geometry',
-            stylers: [
-              { lightness: 100 },
-              { visibility: "simplified" }
-            ]
-          }, {
-            featureType: 'road',
-            elementType: 'labels',
-            stylers: [
-              { saturation: -100 },
-              { invert_lightness: true }
-            ]
-          }, {
-            featureType: 'landscape',
-            elementType: 'geometry',
-            stylers: [
-              { hue: "#524E4E" },
-              { saturation: 10 },
-              { lightness: -20 },
-              { gamma: 1.51 }
-            ]
-          }, {
-            featureType: "road",
-            elementType: "labels",
-            stylers: [
-              { visibility: "off" }
-            ]
-          }
-        ]);
-      }
-      google.maps.event.addDomListener(window, 'load', initialize);
-    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.1/js/materialize.min.js"></script>
   </head>
 
   <body class="body">
-    
+
     <!-- Top navigation panel -->
     <div class="row">
       {% block top_nav %}{% include "top_navigation.html" %}{% endblock %}
