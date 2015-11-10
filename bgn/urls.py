@@ -23,6 +23,7 @@ urlpatterns = [
     url(r'^friends/', get_list_of_friends, name="friends"),
     url(r'^users/', users, name="users"),
     url(r'^games/', games, name="games"),
+    url(r'^guild_detail/', guild_detail, name="guild_detail"),
     # url(r'^admin/', include(admin.site.urls)),
 ]
 

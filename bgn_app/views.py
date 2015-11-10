@@ -65,3 +65,35 @@ def games(request):
 
     return HttpResponse(template.render(context))
 
+def guild_detail(request):
+    guild_info ={
+        'name':'an example name',
+        'description':'this is just an example description.this is just an example description.this is just an example description.this is just an example description.this is just an example description.this is just an example description.this is just an example description.',
+        'game_list':'example games',
+        'admin':'john doe',
+        'contact_info':'blabla',
+        'image':'blabla',
+        'members_list':[1,2,3,4,5],
+    }
+    guild_member ={
+        'members':[1,2,3,4,5],
+    }
+    guild_event ={
+        'events':[1,2,3,4,5]
+    }
+    r = requests.get('https://www.boardgamegeek.com/xmlapi/collection/irkinvader')
+    data = xmltodict.parse(r.text)
+    guild_game ={
+        'games': data
+    }
+    template = loader.get_template('guild_detail.html')
+    data = guild_info;
+    context = RequestContext(request, { 
+        'guild_detail': data,
+        'guild_members': guild_member,
+        'guild_events': guild_event,
+        'guild_games': guild_game,
+    })
+
+    return HttpResponse(template.render(context))
+
