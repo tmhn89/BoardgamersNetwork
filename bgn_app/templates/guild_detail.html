@@ -1,20 +1,40 @@
 {% extends "layout.html" %}
 {% load staticfiles %}
 {% block content %}
-{% if guild_detail %}
+{% if guild %}
+
+<script src="https://maps.googleapis.com/maps/api/js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+
 <div class="row">
   <div class="col s12 m12">
     <div class="card">
       <div class="card-image">
-        <img src="{% static 'cover_img.jpg' %}">
-        <span class="card-title">{{ guild_detail.name }}</span>
+        <img src="{{guild.img_url}}">
+        <span class="card-title">{{ guild.name }}</span>
       </div>
       <div class="card-content">
-        <p>{{ guild_detail.description }}</p>
+        <p>{{ guild.description }}</p>
       </div>
       <div class="card-action">
         <a href="#">Join this guild!</a>
       </div>
+    </div>
+  </div>
+</div>
+<div class="row">
+  <div class="col m6">
+    <div id="map" style="height: 200px">
+      
+    </div>
+  </div>
+  <div class="col s12 m6">
+    <div class="card-panel teal">
+      <span class="white-text">{{ guild.description }}
+      </span>
+      <h6 class="white-text">Head-Quarters:</h6>
+      <span class="white-text">{{ guild.hq }}
+      </span>
     </div>
   </div>
 </div>
@@ -23,14 +43,14 @@
   <div class="col m6">
     <ul class="collection with-header">
       <li class="collection-header"><h4>Upcoming Guild Events</h4></li>
-      {% for event in guild_events.events %}
+      {% for event in events %}
         <li class="collection-item avatar">
           <i class="material-icons circle green">
             <i class="fa fa-calendar"></i>
           </i>
-          <span class="title">Event</span>
-          <p>Event {{ event }} <br>
-              Second Line
+          <span class="title">{{event.main_game}}</span>
+          <p>At: {{event.venue}}<br>
+              Hosted by: {{event.host}}
           </p>
         </li>
       {% endfor %}
@@ -48,65 +68,24 @@
           </p>
           <a href="#!" class="secondary-content"><i class="material-icons">grade</i></a>
       </li>
-      {% for member in guild_members.members %}
+      {% for member in members %}
         <li class="collection-item avatar">
-          <img src="{% static 'profile_pic.png' %}" alt="" class="circle">
-          <span class="title">Member</span>
-          <p>First Line <br>
-              Second Line
+          <img src="{{member.img_url}}" alt="" class="circle">
+          <span class="title">{{member.name}}</span>
+          <p>{{member.location}} <br>
+              {{member.email}}
           </p>
         </li>
       {% endfor %}
     </ul>
   </div>
 </div>
-<div class="row">
-  {% for game in guild_games.games.items.item %}
-  <div class="col m1">
-    <div class="card">
-      <div class="card-image">
-        <img src="{{ game.image }}">
-        <span class="card-title">{{ game.name.text }}</span>
-      </div>
-      <div class="card-content">
-        <p>{{ game.yearpublished }}</p>
-      </div>
-      <div class="card-action">
-        <a href="#"></a>
-      </div>
-    </div>
-  </div>
-  {% endfor %}
-</div>
-<footer class="page-footer teal">
-  <div class="container">
-    <div class="row">
-      <div class="col l6 s12">
-        <h5 class="white-text">Footer Content</h5>
-        <p class="grey-text text-lighten-4">You can use rows and columns here to organize your footer content.</p>
-      </div>
-      <div class="col l4 offset-l2 s12">
-        <h5 class="white-text">Contact {{guild_detail.name}}</h5>
-        <ul>
-          <li><a class="grey-text text-lighten-3" href="#!">Link 1</a></li>
-          <li><a class="grey-text text-lighten-3" href="#!">Link 2</a></li>
-          <li><a class="grey-text text-lighten-3" href="#!">Link 3</a></li>
-          <li><a class="grey-text text-lighten-3" href="#!">Link 4</a></li>
-        </ul>
-      </div>
-    </div>
-  </div>
-  <div class="footer-copyright">
-    <div class="container">
-      © 2015 Copyright Board Gamer's Network
-      <a class="grey-text text-lighten-4 right" href="#!">More Links</a>
-    </div>
-  </div>
-</footer>
-
 
 {% else %}
   No guild....
 {% endif %}
+
+<script  type="text/javascript" src="{% static 'js/maps.js' %}"></script>
+<link rel="stylesheet" type="text/css" href="{% static 'css/maps.css' %}">
 
 {% endblock %}

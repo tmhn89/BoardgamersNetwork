@@ -3,7 +3,7 @@ from django.shortcuts import render_to_response
 from django.template import RequestContext, loader
 from django.contrib.auth.decorators import login_required
 from django.core.serializers import serialize
-from .models import User, Event
+from .models import User, Event, Participants, Guild
 import json as simplejson
 
 import requests
@@ -105,51 +105,56 @@ def games(request):
     return HttpResponse(template.render(context))
 
 def guild_detail(request):
-    guild_info ={
-        'name':'an example name',
-        'description':'this is just an example description.this is just an example description.this is just an example description.this is just an example description.this is just an example description.this is just an example description.this is just an example description.',
-        'game_list':'example games',
-        'admin':'john doe',
-        'contact_info':'blabla',
-        'image':'blabla',
-        'members_list':[1,2,3,4,5],
-    }
-    guild_member ={
-        'members':[1,2,3,4,5],
-    }
-    guild_event ={
-        'events':[1,2,3,4,5]
-    }
-    r = requests.get('https://www.boardgamegeek.com/xmlapi/collection/irkinvader')
-    data = xmltodict.parse(r.text)
-    guild_game ={
-        'games': data
-    }
+    guild_id = 1
+    guild = Guild.objects.get(id=guild_id)
+    
+    guild_member =[3,4,5,7]
+    guild_event =[1,2]
+    member_list = []
+    event_list = []
+    for mid in guild_member:
+        this_member = User.objects.get(id=mid)
+        member_list.append({'name': this_member.name, 'email':this_member.email, 'img_url': this_member.img_url, 'location': this_member.location})
+    for eid in guild_event:
+        this_event = Event.objects.get(id=eid)
+        event_list.append({'venue': this_event.venue, 'time':this_event.time, 'host': this_event.host, 'main_game': this_event.main_game, 'description': this_event.description})
+
+    print(member_list)
     template = loader.get_template('guild_detail.html')
-    data = guild_info;
     context = RequestContext(request, { 
-        'guild_detail': data,
-        'guild_members': guild_member,
-        'guild_events': guild_event,
-        'guild_games': guild_game,
+        'guild': guild,
+        'members': member_list,
+        'events': event_list
     })
 
     return HttpResponse(template.render(context))
 
 def event_detail(request):
+    event_id = 1;
+    event = Event.objects.get(id=event_id)
+    #partcipants = Partcipants.objects.get(event=event_id)
+    participants = [1,2,3,4,5]
+    participants_list = []
+    for pid in participants:
+        this_participant = User.objects.get(id=pid)
+        participants_list.append({'name': this_participant.name, 'email':this_participant.email, 'img_url': this_participant.img_url, 'location': this_participant.location})
+
     event_info ={
         'name':'EVENT name',
         'description':'this is just an example description.this is just an example description.this is just an example description.this is just an example description.this is just an example description.this is just an example description.this is just an example description.',
         'game_list':'example games',
         'host':'john doe',
-        'contact_info':'blabla',
+        'location':'a location',
+        'date':'a date',
         'image':'blabla',
         'participants_list':[1,2,3,4,5],
     }
     template = loader.get_template('event_detail.html')
     data = event_info;
     context = RequestContext(request, { 
-        'event_detail': data
+        'event_detail': event,
+        'participants': participants_list,
+        'host': event.host
     })
 
     return HttpResponse(template.render(context))

@@ -38,9 +38,13 @@
       <!-- All changing page content  -->
       <div id="content" class="col s9 offset-s2">
         {% block content %}{% endblock %}
+        <div class="row">
+          {% block footer %}{% include "footer.html" %}{% endblock %}
+        </div>
       </div>
 
     </div>
+    
 
   </body>
 </html>
