@@ -1,3 +1,4 @@
 bgn/.DS_Store
 .DS_Store
 *.pyc
+db.sqlite3
