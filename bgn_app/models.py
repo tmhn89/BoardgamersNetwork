@@ -33,17 +33,17 @@ class Event(models.Model):
     id = models.AutoField(primary_key=True)
     venue = models.CharField(max_length=200)
     time = models.DateTimeField(auto_now=True)
-    host = models.ForeignKey(User)
     main_game = models.CharField(max_length=200)
     description = models.TextField()    
+    participant = models.ManyToManyField(User, related_name="participants", through="Participant", blank=True)
 
-class Participants(models.Model):
+class Participant(models.Model):
     """
     Represent the n-n relationship between Event & User
     """
     id = models.AutoField(primary_key=True)
-    event = models.ForeignKey(Event)
-    user = models.ForeignKey(User)
+    user = models.ForeignKey(User, related_name="players")
+    event = models.ForeignKey(Event, related_name="players")
     is_host = models.BooleanField(default=False)
 
 class Guild(models.Model):
@@ -55,12 +55,13 @@ class Guild(models.Model):
     img_url = models.CharField(max_length=200)
     hq = models.CharField(max_length=200)
     description = models.TextField()
+    member = models.ManyToManyField(User, related_name="members", through="GuildMember", blank=True)
 
-class GuildMembers(models.Model):
+class GuildMember(models.Model):
     """
     Represent the n-n relationship between Guild & User
     """    
     id = models.AutoField(primary_key=True)
-    guild = models.ForeignKey(Guild)
-    user = models.ForeignKey(User)
+    user = models.ForeignKey(User, related_name="memberships")
+    guild = models.ForeignKey(Guild, related_name="memberships")
     is_leader = models.BooleanField(default=False)
