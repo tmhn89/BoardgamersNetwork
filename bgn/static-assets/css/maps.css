@@ -1,5 +1,5 @@
 #map {
-  width: 100%;
+  width: 109%;
   height: 525px;
 }
 html {
@@ -19,4 +19,9 @@ body {
 }
 .side-nav.fixed a {
   color: white;
+}
+
+.events h5 {
+  color:white;
+  font-weight: 200;
 }
