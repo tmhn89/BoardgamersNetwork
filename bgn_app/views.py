@@ -63,7 +63,7 @@ class Guild():
             },
             {
                 'name': 'Big Guild',
-                'coordinates': [60.11825, 23.73047],
+                'coordinates': [60.172190, 24.947443],
                 'hq': 'Other address',
                 'image_url': 'http://i.imgur.com/Amf3T7i.png',
                 'members': 10,
@@ -71,7 +71,7 @@ class Guild():
             },
             {
                 'name': 'Old Guild',
-                'coordinates': [59.32058, 26.19141],
+                'coordinates': [60.16898, 24.94948],
                 'hq': 'Some address',
                 'image_url': 'https://upload.wikimedia.org/wikipedia/commons/9/95/Rembrandt_-_De_Staalmeesters-_het_college_van_staalmeesters_(waardijns)_van_het_Amsterdamse_lakenbereidersgilde_-_Google_Art_Project.jpg',
                 'members': 48,

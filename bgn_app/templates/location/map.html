@@ -8,35 +8,46 @@
 
 {% if events %}
 
-<div class="events"><h5>Events</h5></div>
+<div class="around_me">
+  <h5>Around Me</h5>
+<!--   <span style="display: inline-block;">
+    <h5>Around Me</h5>
+    <ul id="dropdown2" class="dropdown-content">
+      <li><a href="#!">one<span class="badge">1</span></a></li>
+      <li><a href="#!">two<span class="new badge">1</span></a></li>
+      <li><a href="#!">three</a></li>
+    </ul>
+    <a class="btn dropdown-button" href="#!" data-activates="dropdown2">Dropdown<i class="mdi-navigation-arrow-drop-down right"></i></a>
+  </span> -->
   <div class="row">
-    <div class="col s11">
-      <div id="map">events</div>
+    <div class="col s12">
+      <div id="map"></div>
     </div>
-    <div class="col s1">
-      <span>
-        <form action="#">
-          <span>
-            <input type="checkbox" id="events" checked="checked"/>
-            <label for="events" style="right: 57px; top: 14px; margin: 4px; background-color: #ffffff; opacity:0.6;filter:alpha(opacity=60);">Events</label>
-          </span>
-          <span>
-            <input type="checkbox" id="guilds" />
-            <label for="guilds" style="right: 57px; top: 14px; margin: 4px; background-color: #ffffff; opacity:0.6;filter:alpha(opacity=60);">Guilds</label>
-          </span>
-          <span>
-            <input type="checkbox" id="shops" />
-            <label for="shops" style="right: 57px; top: 14px; margin: 4px; background-color: #ffffff; opacity:0.6;filter:alpha(opacity=60);">Shops</label>
-          </span>
-        </form>
-      </span>
+    <div class="check_map col s1">
+      <form id="check_map" action="#">
+        <span>
+          <input type="checkbox" id="events" checked="checked"/>
+          <label for="events">Events</label>
+        </span>
+        <span>
+          <input type="checkbox" id="guilds" checked="checked"/>
+          <label for="guilds">Guilds</label>
+        </span>
+        <span>
+          <input type="checkbox" id="stores" checked="checked"/>
+          <label for="stores">Stores</label>
+        </span>
+      </form>
     </div>
   </div>
-  <div class="row">
-    <script type="text/javascript">
-      var coordinate_list = [];
-      var dict = {};
-    </script>
+  <script type="text/javascript">
+    var coordinate_list = [];
+    var event_dict = {};
+    var guild_dict = {};
+    var store_dict = {};
+  </script>
+  <div class="events row">
+    <h5>Events</h5>
     {% for event in events %}
     <div class="col s12 m6">
       <div class="card small blue-grey darken-1">
@@ -52,12 +63,46 @@
           coordinate_list = event_coord.split(',');
           list.push(Number(coordinate_list[0].replace('[','')));
           list.push(Number(coordinate_list[1].replace(']','')));
-          dict[event_name] = list;
+          event_dict[event_name] = list;
+
+
+          function toRadians(degrees) {
+            return degrees * Math.PI / 180;
+          }
+
+          var list = [];
+          coordinate_list = event_coord.split(',');
+
+          // coordinates for event
+          var ev_coord_x = Number(coordinate_list[0].replace('[',''));
+          var ev_coord_y = Number(coordinate_list[1].replace(']',''));
+          list.push(ev_coord_x);
+          list.push(ev_coord_y);
+
+          event_dict[event_name] = list;
+
+          var user_location_x = 60.186289;
+          var user_location_y = 24.828528;
+
+          // var R = 6371000; // earth’s radius
+          // var φ1 = toRadians(user_location_x);
+          // var φ2 = toRadians(ev_coord_x);
+          // var Δφ = toRadians(ev_coord_x-user_location_x);
+          // var Δλ = toRadians(ev_coord_y-user_location_y);
+
+          // var a = Math.sin(Δφ/2) * Math.sin(Δφ/2) +
+          //         Math.cos(φ1) * Math.cos(φ2) *
+          //         Math.sin(Δλ/2) * Math.sin(Δλ/2);
+          // var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+
+          // var d = R * c;
+
+          // console.log(d);
         </script>
-        <div class="card-content white-text">
+        <div class="event card-content white-text">
           <p>{{ event.address }}</p>
           <p>{{ event.attendee_count}} people going</p>
-          <p>Game of the event is {{ event.main_game}}</p>
+          <!-- <p>Game of the event is {{ event.main_game}}</p> -->
         </div>
         <div class="card-action">
           <a href="#">Join event</a>
@@ -65,9 +110,13 @@
         </div>
       </div>
     </div>
-  {% endfor %}
+    {% endfor %}
+  </div>
 
-  {% for guild in guilds %}
+
+  <div class="guilds row">
+    <h5>Guilds</h5>
+    {% for guild in guilds %}
     <div class="col s12 m6">
       <div class="card small blue-grey darken-1">
         <div class="card-image">
@@ -82,7 +131,7 @@
           coordinate_list = guild_coord.split(',');
           list.push(Number(coordinate_list[0].replace('[','')));
           list.push(Number(coordinate_list[1].replace(']','')));
-          dict[guild_name] = list;
+          guild_dict[guild_name] = list;
         </script>
         <div class="card-content white-text">
           <p>{{ guild.hq }}</p>
@@ -94,9 +143,12 @@
         </div>
       </div>
     </div>
-  {% endfor %}
+    {% endfor %}
+  </div>
 
-  {% for store in stores %}
+  <div class="stores row">
+    <h5>Stores</h5>
+    {% for store in stores %}
     <div class="col s12 m6">
       <div class="card small blue-grey darken-1">
         <div class="card-image">
@@ -111,7 +163,7 @@
           coordinate_list = store_coord.split(',');
           list.push(Number(coordinate_list[0].replace('[','')));
           list.push(Number(coordinate_list[1].replace(']','')));
-          dict[store_name] = list;
+          store_dict[store_name] = list;
         </script>
         <div class="card-content white-text">
           <p>{{ store.address }}</p>
@@ -123,7 +175,8 @@
         </div>
       </div>
     </div>
-  {% endfor %}
+    {% endfor %}
+  </div>
 
 </div>
 {% endif %}
