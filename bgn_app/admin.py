@@ -6,3 +6,5 @@ from .models import *
 admin.site.register(User)
 admin.site.register(Event)
 admin.site.register(Guild)
+admin.site.register(Participant)
+admin.site.register(GuildMember)

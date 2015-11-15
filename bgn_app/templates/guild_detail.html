@@ -10,11 +10,31 @@
   <div class="col s12 m12">
     <div class="card">
       <div class="card-image">
-        <img src="{{guild.img_url}}">
+        <img src="{{guild.img_url}}" style="height: 300px">
         <span class="card-title">{{ guild.name }}</span>
       </div>
       <div class="card-content">
-        <p>{{ guild.description }}</p>
+        <div class="col m6">
+          <p>{{ guild.description }}</p> 
+        </div>
+        <div class="col s12 m6">
+          <div class="card-panel teal">
+            <div class="row">
+              <h6 class="white-text">Leaders of this guild</h6>
+              {% for leader in leaders %}
+                <div class="chip">
+                  <img src="{{ leader.user.img_url }}" alt="Contact Person">
+                    {{ leader.user.name }}
+                </div>
+              {% endfor %}
+            </div>
+            <div class="row">
+              <i class="small material-icons" style="color: white">location_on</i>
+              <span class="white-text">{{ guild.hq }}
+              </span>
+            </div>
+          </div>
+        </div>
       </div>
       <div class="card-action">
         <a href="#">Join this guild!</a>
@@ -28,58 +48,27 @@
       
     </div>
   </div>
-  <div class="col s12 m6">
-    <div class="card-panel teal">
-      <span class="white-text">{{ guild.description }}
-      </span>
-      <h6 class="white-text">Head-Quarters:</h6>
-      <span class="white-text">{{ guild.hq }}
-      </span>
-    </div>
-  </div>
-</div>
-
-<div class="row">
-  <div class="col m6">
-    <ul class="collection with-header">
-      <li class="collection-header"><h4>Upcoming Guild Events</h4></li>
-      {% for event in events %}
-        <li class="collection-item avatar">
-          <i class="material-icons circle green">
-            <i class="fa fa-calendar"></i>
-          </i>
-          <span class="title">{{event.main_game}}</span>
-          <p>At: {{event.venue}}<br>
-              Hosted by: {{event.host}}
-          </p>
-        </li>
-      {% endfor %}
-    </ul>
-  </div>
-
+  
   <div class="col m6">
     <ul class="collection with-header">
       <li class="collection-header"><h4>Guild Members</h4></li>
-      <li class="collection-item avatar">
-        <img src="{% static 'profile_pic.png' %}" alt="" class="circle">
-          <span class="title">Guild Admin</span>
-          <p>First Line <br>
-             Second Line
-          </p>
-          <a href="#!" class="secondary-content"><i class="material-icons">grade</i></a>
-      </li>
       {% for member in members %}
         <li class="collection-item avatar">
-          <img src="{{member.img_url}}" alt="" class="circle">
-          <span class="title">{{member.name}}</span>
-          <p>{{member.location}} <br>
-              {{member.email}}
+          <img src="{{ member.user.img_url }}" alt="" class="circle">
+          <span class="title">{{member.user.name}}</span>
+          <p>{{member.user.location}} <br>
+              {{member.user.email}}
           </p>
         </li>
       {% endfor %}
     </ul>
   </div>
 </div>
+<div class="row">
+  
+</div>
+
+
 
 {% else %}
   No guild....

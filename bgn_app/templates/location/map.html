@@ -11,13 +11,27 @@
 <div class="events"><h5 style="color:white;font-weight: 200;">Events</h5></div>
   <div id="map">events</div>
   <div class="row">
+  <script type="text/javascript">
+    var coordinate_list = [];
+    var dict = {};
+  </script>
   {% for event in events %}
     <div class="col s12 m6">
       <div class="card small blue-grey darken-1">
         <div class="card-image">
           <img src="{{ event.image_url }}">
-          <span class="card-title">{{ event.name }}</span>
+          <span id="event_name" class="card-title">{{ event.name }}</span>
         </div>
+        <script type="text/javascript">
+          var event_name = "{{event.name}}";
+          var event_coord = "{{event.coordinates}}";
+
+          var list = [];
+          coordinate_list = event_coord.split(',');
+          list.push(Number(coordinate_list[0].replace('[','')));
+          list.push(Number(coordinate_list[1].replace(']','')));
+          dict[event_name] = list;
+        </script>
         <div class="card-content white-text">
           <p>{{ event.address }}</p>
           <p>{{ event.attendee_count}} people going</p>
@@ -31,6 +45,7 @@
   {% endfor %}
 </div>
 {% endif %}
+
 <script  type="text/javascript" src="{% static 'js/maps.js' %}"></script>
 <link rel="stylesheet" type="text/css" href="{% static 'css/maps.css' %}">
 {% endblock %}

@@ -3,6 +3,15 @@ Repository for the project of "Design of WWW Services" course
 
 ### Changelogs
 
+##### 11/11/2015
+- Create many to many relationship between guilds & user; events & users
+- Allow managing entities in admin page.
+    - link: localhost:8000/admin
+    - username: bgnadmin
+    - password: not_specified
+- gitignore: database file (db.sqlite3) will no longer be committed.
+    - if there are changes in the database structure (pulled new files in bgn_app/migrations), run the command "python manage.py migrate" first
+
 ##### 10/11/2015
 - Merge fea_map_makers into dev
 - Merge fea_games into dev. install the following:
