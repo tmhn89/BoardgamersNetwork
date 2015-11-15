@@ -31,11 +31,15 @@ class Event(models.Model):
     Represent the game Event entity
     """
     id = models.AutoField(primary_key=True)
+    name = models.CharField(max_length=200)
     venue = models.CharField(max_length=200)
     time = models.DateTimeField(auto_now=True)
     main_game = models.CharField(max_length=200)
     description = models.TextField()
     participant = models.ManyToManyField(User, related_name="participants", through="Participant", blank=True)
+
+    def __str__(self):
+       return str(self.id) + ' - ' + self.name
 
 class Participant(models.Model):
     """
@@ -45,6 +49,12 @@ class Participant(models.Model):
     user = models.ForeignKey(User, related_name="players")
     event = models.ForeignKey(Event, related_name="players")
     is_host = models.BooleanField(default=False)
+
+    def __str__(self):
+        role = '';
+        if self.is_host:
+            role = " (Host)";
+        return str(self.id) + " - " + self.event.name + " - " + self.user.name + role
 
 class Guild(models.Model):
     """
@@ -57,6 +67,9 @@ class Guild(models.Model):
     description = models.TextField()
     member = models.ManyToManyField(User, related_name="members", through="GuildMember", blank=True)
 
+    def __str__(self):
+       return str(self.id) + ' - ' + self.name
+
 class GuildMember(models.Model):
     """
     Represent the n-n relationship between Guild & User
@@ -65,3 +78,9 @@ class GuildMember(models.Model):
     user = models.ForeignKey(User, related_name="memberships")
     guild = models.ForeignKey(Guild, related_name="memberships")
     is_leader = models.BooleanField(default=False)
+
+    def __str__(self):
+        role = '';
+        if self.is_leader == True:
+            role = " (Leader)";
+        return str(self.id) + " - " + self.guild.name + " - " + self.user.name + role
