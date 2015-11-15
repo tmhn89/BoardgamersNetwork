@@ -47,7 +47,10 @@
     var store_dict = {};
   </script>
   <div class="events row">
-    <h5>Events</h5>
+    <span style="display: flex;">
+      <h5>Events</h5>
+      <a style="margin-left: 14px;" class="btn-floating btn-medium waves-effect waves-light red"><i class="material-icons">add</i></a>
+    </span>
     {% for event in events %}
     <div class="col s12 m6">
       <div class="card small blue-grey darken-1">
@@ -115,7 +118,10 @@
 
 
   <div class="guilds row">
-    <h5>Guilds</h5>
+    <span style="display: flex;">
+      <h5>Guilds</h5>
+      <a style="margin-left: 14px;" class="btn-floating btn-medium waves-effect waves-light red"><i class="material-icons">add</i></a>
+    </span>
     {% for guild in guilds %}
     <div class="col s12 m6">
       <div class="card small blue-grey darken-1">
@@ -147,7 +153,10 @@
   </div>
 
   <div class="stores row">
-    <h5>Stores</h5>
+    <span style="display: flex;">
+      <h5>Stores</h5>
+      <a style="margin-left: 14px;" class="btn-floating btn-medium waves-effect waves-light red"><i class="material-icons">add</i></a>
+    </span>
     {% for store in stores %}
     <div class="col s12 m6">
       <div class="card small blue-grey darken-1">
