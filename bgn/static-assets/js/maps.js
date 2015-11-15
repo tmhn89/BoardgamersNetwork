@@ -79,16 +79,31 @@ $( document ).ready(function() {
         var stores_markers = [];
         function addMarkerToMap(map, name, latlng, type){
             var infoWin = new google.maps.InfoWindow({content: name});
-            var marker = new google.maps.Marker({
-                map: map,
-                position: latlng,
-                title: name,
-            });
+            var marker;
+
             if (type === 'events') {
+                marker = new google.maps.Marker({
+                    map: map,
+                    position: latlng,
+                    title: name,
+                    icon: '/static-assets/marker_event.png'
+                });
                 events_markers.push(marker);
             } else if (type === 'guilds') {
+                marker = new google.maps.Marker({
+                    map: map,
+                    position: latlng,
+                    title: name,
+                    icon: '/static-assets/marker_guild.png'
+                });
                 guilds_markers.push(marker);
             } else {
+                marker = new google.maps.Marker({
+                    map: map,
+                    position: latlng,
+                    title: name,
+                    icon: '/static-assets/marker_store.png'
+                });
                 stores_markers.push(marker);
             }
             google.maps.event.addListener(marker, 'click', function(){
