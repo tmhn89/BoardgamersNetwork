@@ -8,14 +8,50 @@
 
 {% if events %}
 
-<div class="events"><h5 style="color:white;font-weight: 200;">Events</h5></div>
-  <div id="map">events</div>
+<div class="around_me">
+  <h5>Around Me</h5>
+<!--   <span style="display: inline-block;">
+    <h5>Around Me</h5>
+    <ul id="dropdown2" class="dropdown-content">
+      <li><a href="#!">one<span class="badge">1</span></a></li>
+      <li><a href="#!">two<span class="new badge">1</span></a></li>
+      <li><a href="#!">three</a></li>
+    </ul>
+    <a class="btn dropdown-button" href="#!" data-activates="dropdown2">Dropdown<i class="mdi-navigation-arrow-drop-down right"></i></a>
+  </span> -->
   <div class="row">
+    <div class="col s12">
+      <div id="map"></div>
+    </div>
+    <div class="check_map col s1">
+      <form id="check_map" action="#">
+        <span>
+          <input type="checkbox" id="events" checked="checked"/>
+          <label for="events">Events</label>
+        </span>
+        <span>
+          <input type="checkbox" id="guilds" checked="checked"/>
+          <label for="guilds">Guilds</label>
+        </span>
+        <span>
+          <input type="checkbox" id="stores" checked="checked"/>
+          <label for="stores">Stores</label>
+        </span>
+      </form>
+    </div>
+  </div>
   <script type="text/javascript">
     var coordinate_list = [];
-    var dict = {};
+    var event_dict = {};
+    var guild_dict = {};
+    var store_dict = {};
   </script>
-  {% for event in events %}
+  <div class="events row">
+    <span style="display: flex;">
+      <h5>Events</h5>
+      <a style="margin-left: 14px;" class="btn-floating btn-medium waves-effect waves-light red"><i class="material-icons">add</i></a>
+    </span>
+    {% for event in events %}
     <div class="col s12 m6">
       <div class="card small blue-grey darken-1">
         <div class="card-image">
@@ -30,11 +66,46 @@
           coordinate_list = event_coord.split(',');
           list.push(Number(coordinate_list[0].replace('[','')));
           list.push(Number(coordinate_list[1].replace(']','')));
-          dict[event_name] = list;
+          event_dict[event_name] = list;
+
+
+          function toRadians(degrees) {
+            return degrees * Math.PI / 180;
+          }
+
+          var list = [];
+          coordinate_list = event_coord.split(',');
+
+          // coordinates for event
+          var ev_coord_x = Number(coordinate_list[0].replace('[',''));
+          var ev_coord_y = Number(coordinate_list[1].replace(']',''));
+          list.push(ev_coord_x);
+          list.push(ev_coord_y);
+
+          event_dict[event_name] = list;
+
+          var user_location_x = 60.186289;
+          var user_location_y = 24.828528;
+
+          // var R = 6371000; // earth’s radius
+          // var φ1 = toRadians(user_location_x);
+          // var φ2 = toRadians(ev_coord_x);
+          // var Δφ = toRadians(ev_coord_x-user_location_x);
+          // var Δλ = toRadians(ev_coord_y-user_location_y);
+
+          // var a = Math.sin(Δφ/2) * Math.sin(Δφ/2) +
+          //         Math.cos(φ1) * Math.cos(φ2) *
+          //         Math.sin(Δλ/2) * Math.sin(Δλ/2);
+          // var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+
+          // var d = R * c;
+
+          // console.log(d);
         </script>
-        <div class="card-content white-text">
+        <div class="event card-content white-text">
           <p>{{ event.address }}</p>
           <p>{{ event.attendee_count}} people going</p>
+          <!-- <p>Game of the event is {{ event.main_game}}</p> -->
         </div>
         <div class="card-action">
           <a href="#">Join event</a>
@@ -42,7 +113,80 @@
         </div>
       </div>
     </div>
-  {% endfor %}
+    {% endfor %}
+  </div>
+
+
+  <div class="guilds row">
+    <span style="display: flex;">
+      <h5>Guilds</h5>
+      <a style="margin-left: 14px;" class="btn-floating btn-medium waves-effect waves-light red"><i class="material-icons">add</i></a>
+    </span>
+    {% for guild in guilds %}
+    <div class="col s12 m6">
+      <div class="card small blue-grey darken-1">
+        <div class="card-image">
+          <img src="{{ guild.image_url }}">
+          <span id="guild_name" class="card-title">{{ guild.name }}</span>
+        </div>
+        <script type="text/javascript">
+          var guild_name = "{{guild.name}}";
+          var guild_coord = "{{guild.coordinates}}";
+
+          var list = [];
+          coordinate_list = guild_coord.split(',');
+          list.push(Number(coordinate_list[0].replace('[','')));
+          list.push(Number(coordinate_list[1].replace(']','')));
+          guild_dict[guild_name] = list;
+        </script>
+        <div class="card-content white-text">
+          <p>{{ guild.hq }}</p>
+          <p>{{ guild.members}} members</p>
+        </div>
+        <div class="card-action">
+          <a href="#">Join guild</a>
+          <a href="#">See guild details</a>
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+
+  <div class="stores row">
+    <span style="display: flex;">
+      <h5>Stores</h5>
+      <a style="margin-left: 14px;" class="btn-floating btn-medium waves-effect waves-light red"><i class="material-icons">add</i></a>
+    </span>
+    {% for store in stores %}
+    <div class="col s12 m6">
+      <div class="card small blue-grey darken-1">
+        <div class="card-image">
+          <img src="{{ store.image_url }}">
+          <span id="store_name" class="card-title">{{ store.name }}</span>
+        </div>
+        <script type="text/javascript">
+          var store_name = "{{store.name}}";
+          var store_coord = "{{store.coordinates}}";
+
+          var list = [];
+          coordinate_list = store_coord.split(',');
+          list.push(Number(coordinate_list[0].replace('[','')));
+          list.push(Number(coordinate_list[1].replace(']','')));
+          store_dict[store_name] = list;
+        </script>
+        <div class="card-content white-text">
+          <p>{{ store.address }}</p>
+          <p>{{ store.store_type}}</p>
+        </div>
+        <div class="card-action">
+          <a href="#">Store website</a>
+          <a href="#">See store details</a>
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+
 </div>
 {% endif %}
 

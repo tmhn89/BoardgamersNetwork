@@ -1,7 +1,3 @@
-#map {
-  width: 100%;
-  height: 525px;
-}
 html {
   font-weight: 200;
 }
@@ -11,11 +7,43 @@ a {
 body {
   background-color: #757171;
 }
+h5 {
+  color:white;
+  font-weight: 200;
+  padding-left: 10px;
+}
+
+/*.around_me span {
+  display: flex;
+}
+.around_me a {
+  right: 141px;
+  position: absolute;
+}
+
+*/
+#map {
+  width: 100%;
+  height: 430px;
+}
+
+.check_map {
+  position: absolute;
+  right: 129px;
+  top: 133px;
+  background-color: #ffffff;
+  opacity: 0.6;
+  padding: 5px 0 5px 8px !important;
+  margin: 9px;
+}
+.check_map label {
+  color: #000;
+}
 .icon_hover i.hover_hide {
   visibility:hidden;
 }
 .icon_hover:hover i.hover_hide {
- visibility:visible;
+  visibility:visible;
 }
 .side-nav.fixed a {
   color: white;
