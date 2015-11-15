@@ -11,12 +11,14 @@ import xmltodict
 from .models import *
 
 
-class Event():
+class Events():
 
     def get_events(self):
+        # Function for retrieveing all events near the user
 
         events = [
             {
+                'id': 1,
                 'name': 'GameDay',
                 'coordinates': [60.18775, 24.82846],
                 'address': 'Jamerantaival 1',
@@ -26,6 +28,7 @@ class Event():
                 'main_game': 'Game of Thrones'
             },
             {
+                'id': 2,
                 'name': 'Otaniemi Gaming Night',
                 'coordinates': [60.18345, 24.78526],
                 'address': 'Otakaari 20',
@@ -35,6 +38,7 @@ class Event():
                 'main_game': 'Kimble'
             },
             {
+                'id': 3,
                 'name': 'Dominion',
                 'coordinates': [60.16899, 24.94938],
                 'address': 'Konemiehentie 1',
@@ -48,12 +52,13 @@ class Event():
         return events
 
 
-class Guild():
+class Guilds():
 
     def get_guilds(self):
 
         guilds = [
             {
+                'id': 1,
                 'name': 'Best Guild',
                 'coordinates': [60.18008, 24.81382],
                 'hq': 'Mantyviita 3',
@@ -62,6 +67,7 @@ class Guild():
                 'description': 'Lorem ipsum dolor sit amet, non numquam proinmae.'
             },
             {
+                'id': 2,
                 'name': 'Big Guild',
                 'coordinates': [60.172190, 24.947443],
                 'hq': 'Other address',
@@ -70,6 +76,7 @@ class Guild():
                 'description': 'Lorem ipsum dolor sit amet, non numquam proinmae.'
             },
             {
+                'id': 3,
                 'name': 'Old Guild',
                 'coordinates': [60.16898, 24.94948],
                 'hq': 'Some address',
@@ -82,7 +89,7 @@ class Guild():
         return guilds
 
 
-class Store():
+class Stores():
 
     def get_stores(self):
 
@@ -120,9 +127,9 @@ class Store():
 
 
 def around_me(self):
-    events = Event().get_events()
-    guilds = Guild().get_guilds()
-    stores = Store().get_stores()
+    events = Events().get_events()
+    guilds = Guilds().get_guilds()
+    stores = Stores().get_stores()
 
     return render_to_response(
         'location/map.html', {
@@ -131,6 +138,89 @@ def around_me(self):
             'stores': stores
         }
     )
+
+def get_users_events(self):
+        # Function for retrieveing all users events
+
+        events = [
+            {
+                'id': 1,
+                'name': 'GameDay',
+                'coordinates': [60.18775, 24.82846],
+                'address': 'Jamerantaival 1',
+                'image_url': 'https://theromanticvineyard.files.wordpress.com/2013/01/clue-board.jpg',
+                'attendee_count': 9,
+                'description': 'Lorem ipsum dolor sit amet, non numquam proinmae.',
+                'main_game': 'Game of Thrones'
+            },
+            {
+                'id': 2,
+                'name': 'Otaniemi Gaming Night',
+                'coordinates': [60.18345, 24.78526],
+                'address': 'Otakaari 20',
+                'image_url': 'http://d1mvvfdyo8jq4k.cloudfront.net/media/susd/images/2013/7/28/c6138082f7ce11e28594f23c91709c91_1375047823.jpg',
+                'attendee_count': 16,
+                'description': 'Lorem ipsum dolor sit amet, non numquam proinmae.',
+                'main_game': 'Kimble'
+            },
+            {
+                'id': 3,
+                'name': 'Dominion',
+                'coordinates': [60.16899, 24.94938],
+                'address': 'Konemiehentie 1',
+                'image_url': 'http://thisisinfamous.com/wp-content/uploads/2014/06/dominion-1.jpg',
+                'attendee_count': 4,
+                'description': 'Lorem ipsum dolor sit amet, non numquam proinmae.',
+                'main_game': 'Dominion'
+            },
+        ]
+
+        return render_to_response(
+            'events/list_events.html', {
+                'events': events,
+            }
+        )
+
+
+def get_users_guilds(self):
+
+    guilds = [
+        {
+            'id': 1,
+            'name': 'Best Guild',
+            'coordinates': [60.18008, 24.81382],
+            'hq': 'Mantyviita 3',
+            'image_url': 'http://www.blogcdn.com/wow.joystiq.com/media/2011/04/guild-fireworks-larger.jpg',
+            'members': 4,
+            'description': 'Lorem ipsum dolor sit amet, non numquam proinmae.'
+        },
+        {
+            'id': 2,
+            'name': 'Big Guild',
+            'coordinates': [60.172190, 24.947443],
+            'hq': 'Other address',
+            'image_url': 'http://i.imgur.com/Amf3T7i.png',
+            'members': 10,
+            'description': 'Lorem ipsum dolor sit amet, non numquam proinmae.'
+        },
+        {
+            'id': 3,
+            'name': 'Old Guild',
+            'coordinates': [60.16898, 24.94948],
+            'hq': 'Some address',
+            'image_url': 'https://upload.wikimedia.org/wikipedia/commons/9/95/Rembrandt_-_De_Staalmeesters-_het_college_van_staalmeesters_(waardijns)_van_het_Amsterdamse_lakenbereidersgilde_-_Google_Art_Project.jpg',
+            'members': 48,
+            'description': 'Lorem ipsum dolor sit amet, non numquam proinmae.'
+        },
+    ]
+
+    return render_to_response(
+        'guilds/list_guilds.html', {
+            'guilds': guilds,
+        }
+    )
+
+
 
 
 @login_required
@@ -190,15 +280,15 @@ def games(request):
 
     return HttpResponse(template.render(context))
 
-def guild_detail(request):
+def guild_detail(request, guild_id):
     guild_id = 1
     guild = Guild.objects.get(id=guild_id)
-    
+
     leaders = GuildMember.objects.filter(is_leader=True).filter(guild=guild_id);
     members = GuildMember.objects.filter(is_leader=False).filter(guild=guild_id);
 
     template = loader.get_template('guild_detail.html')
-    context = RequestContext(request, { 
+    context = RequestContext(request, {
         'guild': guild,
         'members': members,
         'leaders': leaders,
@@ -207,14 +297,13 @@ def guild_detail(request):
 
     return HttpResponse(template.render(context))
 
-def event_detail(request):
-    event_id = 1;
+def event_detail(request, event_id):
     event = Event.objects.get(id=event_id)
     hosts = Participant.objects.filter(is_host=True).filter(event=event_id);
     participants = Participant.objects.filter(is_host=False).filter(event=event_id);
 
     template = loader.get_template('event_detail.html')
-    context = RequestContext(request, { 
+    context = RequestContext(request, {
         'event_detail': event,
         'participants': participants,
         'hosts': hosts

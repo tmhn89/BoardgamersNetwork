@@ -1,0 +1,23 @@
+html {
+  font-weight: 200;
+}
+a {
+  color: white;
+}
+body {
+  background-color: #757171;
+}
+h5 {
+  color:white;
+  font-weight: 200;
+  padding-left: 10px;
+}
+.icon_hover i.hover_hide {
+  visibility:hidden;
+}
+.icon_hover:hover i.hover_hide {
+  visibility:visible;
+}
+.side-nav.fixed a {
+  color: white;
+}
