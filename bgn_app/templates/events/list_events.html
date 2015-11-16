@@ -1,0 +1,32 @@
+{% extends "layout.html" %}
+{% load staticfiles %}
+{% block title %} Events {% endblock %}
+{% block content %}
+
+<div class="events row">
+  <span style="display: flex;">
+    <h5>Events</h5>
+    <a style="margin-left: 14px;" class="btn-floating btn-medium waves-effect waves-light deep-purple lighten-1"><i class="material-icons">add</i></a>
+  </span>
+  {% for event in events %}
+  <div class="col s12 m6">
+    <div class="card small blue-grey darken-1">
+      <div class="card-image">
+        <img src="{{ event.image_url }}">
+        <span id="event_name" class="card-title">{{ event.name }}</span>
+      </div>
+      <div class="event card-content white-text">
+        <p>{{ event.address }}</p>
+        <p>{{ event.attendee_count}} people going</p>
+        <!-- <p>Game of the event is {{ event.main_game}}</p> -->
+      </div>
+      <div class="card-action">
+        <a href="#">Join event</a>
+        <a href="/event_detail/{{ event.id }}">See event details</a>
+      </div>
+    </div>
+  </div>
+  {% endfor %}
+</div>
+
+{% endblock %}
