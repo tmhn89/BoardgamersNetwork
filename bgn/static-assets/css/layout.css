@@ -21,3 +21,17 @@ h5 {
 .side-nav.fixed a {
   color: white;
 }
+#slide-out {
+  top:64px;
+  width: 208px;
+  background-color: #524E4E;
+}
+#slide-out li:hover {
+  background: #757575;
+}
+#slide-out li:first-child:hover {
+  background: #524E4E;
+}
+.section a:hover {
+  background: #757575;
+}
