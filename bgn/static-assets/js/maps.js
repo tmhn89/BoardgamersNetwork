@@ -25,6 +25,7 @@ $( document ).ready(function() {
             map: map,
             position: user_latlng,
             title: "My location",
+            icon: '/static-assets/marker_user.png'
         });
         google.maps.event.addListener(user_location, 'click', function(){
             userInfoWin.open(map, user_location);
