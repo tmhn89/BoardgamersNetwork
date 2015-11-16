@@ -1,16 +1,28 @@
 {% load staticfiles %}
-<ul id="slide-out" class="side-nav fixed">
-  <li>
-    <div class="section" style="width: 175px; text-align: center;">
-      <span class="center icon_hover"><h5 style="color: white; font-weight: 200; display: inline; margin: 5px;">Annika Oukka</h5><i class="fa fa-pencil-square-o hover_hide pull-right" style="color: white;"></i></span>
-      <img src="{% static 'profile_pic.png' %}" alt="" style="margin-top: 13px;" class="circle responsive-img">
+
+<div class="side-nav fixed" style="top:0px; width: 208px; background-color: #524E4E;">
+  
+  <div class="row valign-wrapper red">
+    <div class="col s2">
+      <img src="{% static 'dice_icon.png' %}" style="height: 57px; width: 52px; margin: 3px 8px 3px 0px;">
     </div>
-  </li>
-  <li>
-    <a href="/around_me/" class="waves-effectwaves-light" style="color:white;"><i class="material-icons">location_on</i>Helsinki, Finland</a>
-  </li>
-  <li class="bold"><a href="/events/" class="waves-effectwaves-light"><i class="fa fa-calendar" style="padding-right: 4px;"></i> My Events</a></li>
-  <li class="bold"><a href="/guilds/" class="waves-effect waves-light"><img src="{% static 'guild_icon.png' %}" style="height: 18px; width: 18px;"/> My Guilds</a></li>
-  <li class="bold"><a href="/games/" class="waves-effect waves-light"><i class="fa fa-puzzle-piece" style="padding-right: 4px;"></i> My Games</a></li>
-<!--   <li class="bold"><a href="list_friends.html" class="waves-effect waves-teal"><i class="fa fa-users"></i> Friends</a></li> -->
-</ul>
+    <div class="col s10">
+      <a href="/around_me/" class="text-white"> BGN</a>
+    </div>
+  </div>
+  <ul id="slide-out">
+    <li>
+      <div class="section" style="width: 175px; text-align: center;">
+        <span class="center icon_hover"><h5 style="color: white; font-weight: 200; display: inline; margin: 5px;">Annika Oukka</h5><i class="fa fa-pencil-square-o hover_hide pull-right" style="color: white;"></i></span>
+        <img src="{% static 'profile_pic.png' %}" alt="" style="margin-top: 13px;" class="circle responsive-img">
+      </div>
+    </li>
+    <li>
+      <a href="/around_me/" class="waves-effectwaves-light" style="color:white;"><i class="material-icons">location_on</i>Helsinki, Finland</a>
+    </li>
+    <li class="bold"><a href="/events/" class="waves-effectwaves-light"><i class="fa fa-calendar" style="padding-right: 4px;"></i> My Events</a></li>
+    <li class="bold"><a href="/guilds/" class="waves-effect waves-light"><img src="{% static 'guild_icon.png' %}" style="height: 18px; width: 18px;"/> My Guilds</a></li>
+    <li class="bold"><a href="/games/" class="waves-effect waves-light"><i class="fa fa-puzzle-piece" style="padding-right: 4px;"></i> My Games</a></li>
+  <!--   <li class="bold"><a href="list_friends.html" class="waves-effect waves-teal"><i class="fa fa-users"></i> Friends</a></li> -->
+  </ul>
+</div>
