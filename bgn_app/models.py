@@ -1,6 +1,8 @@
 from django.db import models
 from django.contrib import admin
 
+import pdb
+import re
 
 class User(models.Model):
     """
@@ -37,6 +39,11 @@ class Event(models.Model):
     main_game = models.CharField(max_length=200)
     description = models.TextField()
     participants = models.ManyToManyField(User, through="Participant", blank=True)
+
+    def get_games(self):
+        games = self.main_game[1:-1]
+        games = re.sub('\'', '', games)
+        return games
 
     def __str__(self):
        return str(self.id) + ' - ' + self.name

@@ -1,11 +1,12 @@
 from django.http import HttpResponse
-from django.shortcuts import render_to_response, render
+from django.shortcuts import render_to_response, render, redirect
 from django.template import RequestContext, loader
 from django.contrib.auth.decorators import login_required
 from django.core.serializers import serialize
 from .models import User, Event, Participant, Guild, GuildMember
 import json as simplejson
 
+import string
 import requests
 import xmltodict
 from .models import *
@@ -314,11 +315,12 @@ def event_detail(request, event_id):
 
 def event_create(request):
     if request.method == "POST":
-        form = EventForm(request.POST)
+        form = EventForm(request.POST)        
         if form.is_valid():
+            games = request.POST['main_game']
             post = form.save(commit=False)
             post.save()
-            return redirect('event_detail', pk=post.pk)
+            return redirect('event_detail', post.pk)
     else:
         form = EventForm()
-    return render(request, 'event_create.html', {'form': form} )
+    return render(request, 'event_create.html', {'form': form } )

@@ -40,6 +40,25 @@ h5 {
   /*height: 225px;
   overflow: hidden;*/
 }
-.game-item {
-  /*display: none;*/
+form * {
+  color: #fff;
+  font-weight: normal;
+}
+form h1,
+form h2,
+form h3,
+form h4,
+form h5 {
+  font-weight: 100;
+}
+.picker__header * {
+  color: #000;
+}
+ul.errorlist {
+  position: absolute;
+  bottom: -25px;
+  left: 10px;
+}
+ul.errorlist li {
+  color: #ef9a9a;
 }

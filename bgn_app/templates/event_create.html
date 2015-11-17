@@ -1,34 +1,52 @@
 {% extends "layout.html" %}
 {% load staticfiles %}
 {% block content %}
-
-<form>
+<form action="/events/create/" method="POST">
+<h4>Create new event</h4>
     {% csrf_token %}
+    {{ form.non_field_errors }}
     <div class="row">
       <div class="input-field col s6">
-        {{ form.name }}        
-        <label for="{{ form.name.id_for_label }}">Event name:</label>
+        {{ form.name.errors }}
+        {{ form.name }}
+        <label class="active" for="{{ form.name.id_for_label }}">Event name:</label>
       </div>
       <div class="input-field col s6">
+        {{ form.venue.errors }}
         {{ form.venue }}
         <label for="{{ form.venue.id_for_label }}">Event venue:</label>
       </div>
     </div>
     <div class="row">
       <div class="input-field col s6">
+        {{ form.time.errors }}
         {{ form.time }}        
-        <label for="{{ form.time.id_for_label }}">Event time:</label>
+        <label for="{{ form.time.id_for_label }}">Event date:</label>
       </div>
-      <div class="input-field col s6 select-multiple">
+      <div class="input-field col s6">
+        {{ form.main_game.errors }}
         {{ form.main_game }}
         <label for="{{ form.main_game.id_for_label }}">Main games:</label>
       </div>
     </div>
     <div class="row">
-      
+       <div class="input-field col s12">
+          {{ form.description.errors }}
+          {{ form.description }}
+          <label for="{{ form.description.id_for_label }}">Description:</label>
+        </div>
+    </div>
+    <div class="row">
+        <div class="input-field col s12">
+          {{ form.participants.errors }}
+          {{ form.participants }}
+          <label for="{{ form.participant.id_for_label }}">Participants</label>
+        </div>
     </div>        
 
-    <button type="submit" class="save btn btn-default">Save</button>
+    <div class="row center-align">
+      <button type="submit" class="save btn btn-default">Create Event</button>
+    </div>
 </form>
 
 {% endblock %}
