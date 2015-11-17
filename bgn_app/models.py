@@ -41,9 +41,10 @@ class Event(models.Model):
     participants = models.ManyToManyField(User, through="Participant", blank=True)
 
     def get_games(self):
-        games = self.main_game[1:-1]
-        games = re.sub('\'', '', games)
-        return games
+        # games = self.main_game[1:-1]
+        # games = re.sub('\'', '', games)
+        # return games
+        return self.main_game
 
     def __str__(self):
        return str(self.id) + ' - ' + self.name
