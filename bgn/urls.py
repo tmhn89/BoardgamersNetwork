@@ -20,11 +20,12 @@ from bgn_app.views import *
 
 urlpatterns = [
     url(r'^around_me/', around_me, name="around_me"),
-    url(r'^events/', get_users_events, name="events"),
+    url(r'^events/$', get_users_events, name="events"),
     url(r'^guilds/', get_users_guilds, name="guilds"),
     url(r'^users/', users, name="users"),
     url(r'^admin/', include(admin.site.urls)),
     url(r'^games/', games, name="games"),
+    url(r'^events/create/$', event_create, name="event_create"),
     url(r'^guild_detail/(\d+)/$', guild_detail, name="guild_detail"),
     url(r'^event_detail/(\d+)/$', event_detail, name="event_detail"),
     # url(r'^admin/', include(admin.site.urls)),

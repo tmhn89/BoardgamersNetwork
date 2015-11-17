@@ -1,0 +1,34 @@
+{% extends "layout.html" %}
+{% load staticfiles %}
+{% block content %}
+
+<form>
+    {% csrf_token %}
+    <div class="row">
+      <div class="input-field col s6">
+        {{ form.name }}        
+        <label for="{{ form.name.id_for_label }}">Event name:</label>
+      </div>
+      <div class="input-field col s6">
+        {{ form.venue }}
+        <label for="{{ form.venue.id_for_label }}">Event venue:</label>
+      </div>
+    </div>
+    <div class="row">
+      <div class="input-field col s6">
+        {{ form.time }}        
+        <label for="{{ form.time.id_for_label }}">Event time:</label>
+      </div>
+      <div class="input-field col s6 select-multiple">
+        {{ form.main_game }}
+        <label for="{{ form.main_game.id_for_label }}">Main games:</label>
+      </div>
+    </div>
+    <div class="row">
+      
+    </div>        
+
+    <button type="submit" class="save btn btn-default">Save</button>
+</form>
+
+{% endblock %}

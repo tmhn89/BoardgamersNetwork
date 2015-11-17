@@ -33,10 +33,10 @@ class Event(models.Model):
     id = models.AutoField(primary_key=True)
     name = models.CharField(max_length=200)
     venue = models.CharField(max_length=200)
-    time = models.DateTimeField(auto_now=True)
+    time = models.DateTimeField(auto_now=False, editable=True)
     main_game = models.CharField(max_length=200)
     description = models.TextField()
-    participant = models.ManyToManyField(User, related_name="participants", through="Participant", blank=True)
+    participants = models.ManyToManyField(User, through="Participant", blank=True)
 
     def __str__(self):
        return str(self.id) + ' - ' + self.name

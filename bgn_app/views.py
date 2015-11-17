@@ -1,5 +1,5 @@
 from django.http import HttpResponse
-from django.shortcuts import render_to_response
+from django.shortcuts import render_to_response, render
 from django.template import RequestContext, loader
 from django.contrib.auth.decorators import login_required
 from django.core.serializers import serialize
@@ -9,7 +9,8 @@ import json as simplejson
 import requests
 import xmltodict
 from .models import *
-
+from .forms import *
+import pdb
 
 class Events():
 
@@ -310,3 +311,14 @@ def event_detail(request, event_id):
     })
 
     return HttpResponse(template.render(context))
+
+def event_create(request):
+    if request.method == "POST":
+        form = EventForm(request.POST)
+        if form.is_valid():
+            post = form.save(commit=False)
+            post.save()
+            return redirect('event_detail', pk=post.pk)
+    else:
+        form = EventForm()
+    return render(request, 'event_create.html', {'form': form} )

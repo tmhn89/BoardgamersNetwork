@@ -1,12 +1,13 @@
 {% extends "layout.html" %}
 
 {% block content %}
+<div class="row">
 <h3 class="white-text">Games</h3>
 {% if games %}
   
- <div id="masonry-grid" class="row"> 
+ <div id="masonry-grid"> 
   {% for game in games.items.item %}
-  <div class="col s3">
+  <div class="col s3 game-item">
     <div class="card">
       <div class="card-image">
         <img src="{{ game.image }}">
@@ -23,8 +24,9 @@
     
   {% endfor %}
 </div>
+
 {% else %}
   No user....
 {% endif %}
-
+</div>
 {% endblock %}

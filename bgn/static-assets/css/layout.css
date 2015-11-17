@@ -35,4 +35,11 @@ h5 {
 .section a:hover {
   background: #757575;
 }
+.card .card-image {
+  /*Ninh: temporary set height of card-image. remove this after applying masonry effect*/
+  /*height: 225px;
+  overflow: hidden;*/
+}
+.game-item {
+  /*display: none;*/
 }
