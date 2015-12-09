@@ -1,0 +1,15 @@
+<div class="col m12 candidate_div">
+      <ul class="collection with-header">
+        <li class="collection-header"><h4>Candidates</h4></li>
+        {% for candidate in candidates %}
+          <li class="collection-item avatar this_candidate">
+            <img src="{{ candidate.user.img_url }}" alt="" class="circle">
+            <span class="title">{{candidate.user.name}}</span>
+            <p>{{candidate.user.location}} <br>
+                {{candidate.user.email}}
+            </p>
+            <a href="{% url 'guild_candidates' 1 %}" data-user="{{candidate.user.id}}" class="secondary-content add_member"><i class="material-icons">done</i></a>
+          </li>
+        {% endfor %}
+      </ul>
+    </div>

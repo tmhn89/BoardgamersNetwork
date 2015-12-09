@@ -86,6 +86,7 @@ class GuildMember(models.Model):
     user = models.ForeignKey(User, related_name="memberships")
     guild = models.ForeignKey(Guild, related_name="memberships")
     is_leader = models.BooleanField(default=False)
+    is_candidate = models.BooleanField(default=False)
 
     def __str__(self):
         role = '';

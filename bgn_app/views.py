@@ -1,3 +1,4 @@
+from django.http import Http404
 from django.http import HttpResponse
 from django.shortcuts import render_to_response, render, redirect
 from django.template import RequestContext, loader
@@ -282,22 +283,52 @@ def games(request):
 
     return HttpResponse(template.render(context))
 
-def guild_detail(request, guild_id):
-    guild_id = 1
+def guild_detail(request, guild_id, user_id):
+    #guild_id = 1
+    #user_id=3
+    if request.is_ajax():
+        pdb.set_trace()
+
     guild = Guild.objects.get(id=guild_id)
 
     leaders = GuildMember.objects.filter(is_leader=True).filter(guild=guild_id);
-    members = GuildMember.objects.filter(is_leader=False).filter(guild=guild_id);
-
+    members = GuildMember.objects.filter(is_leader=False).exclude(is_candidate=True).filter(guild=guild_id);
+    candidates = GuildMember.objects.filter(is_candidate=True).filter(guild=guild_id);
+    user_state = get_user_guild_state(user_id,guild_id)
+    print(user_state)
     template = loader.get_template('guild_detail.html')
     context = RequestContext(request, {
         'guild': guild,
         'members': members,
         'leaders': leaders,
-        'events': []
+        'events': [],
+        'candidates': candidates,
+        'state': user_state
     })
 
     return HttpResponse(template.render(context))
+
+def guild_candidates(request, guild_id):
+    candidates = GuildMember.objects.filter(is_candidate=False).filter(guild=guild_id);
+    template = loader.get_template('guild_candidates.html')
+    context = RequestContext(request, {
+        'candidates': candidates
+    })
+
+    return HttpResponse(template.render(context))    
+
+def get_user_guild_state(user_id, guild_id):
+    relationship = GuildMember.objects.filter(user=user_id, guild = guild_id)
+    #print(relationship[0].is_leader)
+    if relationship:
+        if relationship[0].is_leader==True:
+            return 'admin'
+        elif relationship[0].is_candidate==True:
+            return 'not_a_member'
+        elif relationship[0].is_candidate==False and relationship[0].is_leader==False:
+            return 'member'
+    else:
+        return 'not_a_member'
 
 def event_detail(request, event_id):
     event = Event.objects.get(id=event_id)

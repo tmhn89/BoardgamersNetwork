@@ -37,7 +37,11 @@
         </div>
       </div>
       <div class="card-action">
-        <a href="#">Join this guild!</a>
+        {% ifequal state 'not_a_member' %}
+          <a href="#">Join this guild!</a>
+        {% else %}
+          <a href="#">Leave this guild!</a>
+        {% endifequal %}
       </div>
     </div>
   </div>
@@ -48,22 +52,13 @@
       
     </div>
   </div>
-  
-  <div class="col m6">
-    <ul class="collection with-header">
-      <li class="collection-header"><h4>Guild Members</h4></li>
-      {% for member in members %}
-        <li class="collection-item avatar">
-          <img src="{{ member.user.img_url }}" alt="" class="circle">
-          <span class="title">{{member.user.name}}</span>
-          <p>{{member.user.location}} <br>
-              {{member.user.email}}
-          </p>
-        </li>
-      {% endfor %}
-    </ul>
-  </div>
-</div>
+  {% ifequal state 'admin' %}
+    <div class="col m6">
+      {% include "guild_candidates.html" %}
+    </div>
+    
+  {% endifequal %}
+  {% include "guild_members.html" %}
 <div class="row">
   
 </div>
@@ -75,6 +70,7 @@
 {% endif %}
 
 <script  type="text/javascript" src="{% static 'js/maps.js' %}"></script>
+<script  type="text/javascript" src="{% static 'js/ajax.js' %}"></script>
 <link rel="stylesheet" type="text/css" href="{% static 'css/maps.css' %}">
 
 {% endblock %}

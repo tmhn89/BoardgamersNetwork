@@ -1,0 +1,18 @@
+<div class="col m6">
+    <ul class="collection with-header">
+      <li class="collection-header"><h4>Guild Members</h4></li>
+      {% for member in members %}
+        <li class="collection-item avatar">
+          <img src="{{ member.user.img_url }}" alt="" class="circle">
+          <span class="title">{{member.user.name}}</span>
+          <p>{{member.user.location}} <br>
+              {{member.user.email}}
+          </p>
+          {% ifequal state 'admin' %}
+            <a href="#!" class="secondary-content"><i class="material-icons">grade</i></a>
+          {% endifequal %}
+        </li>
+      {% endfor %}
+    </ul>
+  </div>
+</div>

@@ -26,7 +26,8 @@ urlpatterns = [
     url(r'^admin/', include(admin.site.urls)),
     url(r'^games/', games, name="games"),
     url(r'^events/create/$', event_create, name="event_create"),
-    url(r'^guild_detail/(\d+)/$', guild_detail, name="guild_detail"),
+    url(r'^guild_detail/(\d+)/(\d+)/$', guild_detail, name="guild_detail"),
+    url(r'^guild_candidates/(\d+)/$', guild_candidates, name="guild_candidates"),
     url(r'^event_detail/(\d+)/$', event_detail, name="event_detail"),
     # url(r'^admin/', include(admin.site.urls)),
 ]
