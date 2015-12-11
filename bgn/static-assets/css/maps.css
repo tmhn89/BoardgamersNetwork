@@ -1,11 +1,12 @@
 #map {
   width: 100%;
   height: 430px;
+  position: relative;
 }
 .check_map {
   position: absolute;
-  right: 129px;
-  top: 133px;
+  right: 35px;
+  top: 66px;
   background-color: #ffffff;
   opacity: 0.8;
   font-weight: 300;

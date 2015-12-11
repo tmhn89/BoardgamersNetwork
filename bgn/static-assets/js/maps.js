@@ -19,7 +19,6 @@ $( document ).ready(function() {
         };
         var map = new google.maps.Map(mapCanvas, mapOptions);
 
-
         var userInfoWin = new google.maps.InfoWindow({content: "My location"});
         var user_location = new google.maps.Marker({
             map: map,
@@ -124,9 +123,9 @@ $( document ).ready(function() {
 
         function addWantedMarkers(){
             // list of dicts
-            var mappoints = [];
+            var mappoints = {};
             if (document.getElementById('events').checked) {
-                mappoints.push(event_dict);
+                mappoints['events'] = event_dict;
                 $( ".events" ).show();
             } else {
                 clearMarkers(events_markers);
@@ -134,7 +133,7 @@ $( document ).ready(function() {
                 $( ".events" ).hide();
             }
             if (document.getElementById('guilds').checked) {
-                mappoints.push(guild_dict);
+                mappoints['guilds'] = guild_dict;
                 $( ".guilds" ).show();
             } else {
                 clearMarkers(guilds_markers);
@@ -142,7 +141,7 @@ $( document ).ready(function() {
                 $( ".guilds" ).hide();
             }
             if (document.getElementById('stores').checked) {
-                mappoints.push(store_dict);
+                mappoints['stores'] = store_dict;
                 $( ".stores" ).show();
             } else {
                 clearMarkers(stores_markers);
@@ -151,29 +150,14 @@ $( document ).ready(function() {
             }
 
             // go through the dict/dicts
-            var type;
-            for (var d in mappoints) {
-                if (d == 0) {
-                    type = 'events';
-                } else if (d == 1) {
-                    type  = 'guilds';
-                } else {
-                    type = 'stores';
-                }
-
-                var dict = mappoints[d];
+            console.log(mappoints);
+            for (var type in mappoints) {
+                var dict = mappoints[type];
                 // for each key in dict add a marker to map
-                for (var key in dict) {
-                    name = key;
-                    coordinates = dict[key];
+                for (var name in dict) {
+                    coordinates = dict[name];
                     latlng = new google.maps.LatLng(coordinates[0], coordinates[1]);
-                    if (type === 'events') {
-                        addMarkerToMap(map, name, latlng, type);
-                    } else if (type === 'guilds') {
-                        addMarkerToMap(map, name, latlng, type);
-                    } else {
-                        addMarkerToMap(map, name, latlng, type);
-                    }
+                    addMarkerToMap(map, name, latlng, type);
                 }
             }
         }
