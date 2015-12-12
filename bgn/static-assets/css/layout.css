@@ -62,3 +62,13 @@ ul.errorlist {
 ul.errorlist li {
   color: #ef9a9a;
 }
+.side-nav div.auth {
+  text-align: center;
+}
+.side-nav div.auth a {
+  height: 24px;
+  line-height: 24px;  
+}
+.side-nav div.auth a:hover {
+  text-decoration: underline;
+}

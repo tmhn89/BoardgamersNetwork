@@ -3,7 +3,7 @@ from django.shortcuts import render_to_response, render, redirect
 from django.template import RequestContext, loader
 from django.contrib.auth.decorators import login_required
 from django.core.serializers import serialize
-from .models import User, Event, Participant, Guild, GuildMember
+from .models import UserProfile, Event, Participant, Guild, GuildMember
 import json as simplejson
 
 import string
@@ -128,7 +128,7 @@ class Stores():
         return stores
 
 
-def around_me(self):
+def around_me(request):
     events = Events().get_events()
     guilds = Guilds().get_guilds()
     stores = Stores().get_stores()
@@ -137,7 +137,8 @@ def around_me(self):
         'location/map.html', {
             'events': events,
             'guilds': guilds,
-            'stores': stores
+            'stores': stores,
+            'user': request.user
         }
     )
 
@@ -240,7 +241,7 @@ def list_of_user_matches(self, request, user_id):
     pass
 
 def users(request):
-    users = User.objects.order_by('-name')[:5]
+    users = UserProfile.objects.order_by('-name')[:5]
 
     # output = "<table>"
     # for user in users:
