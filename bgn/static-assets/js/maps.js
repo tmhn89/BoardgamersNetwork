@@ -3,26 +3,32 @@ $( document ).ready(function() {
     function initialize() {
     // Function for initalizing map on the page
 
-        // Location of the user
-        var user_latlng = new google.maps.LatLng(user_location_x, user_location_y);
-
-        // Define where the map will be loaded
         var mapCanvas = document.getElementById('map');
 
-        // Map options, more can be found here
-        // https://developers.google.com/maps/documentation/javascript/reference#MapOptions
         var mapOptions = {
-            center: user_latlng,
             zoom: 12,
             mapTypeId: google.maps.MapTypeId.ROADMAP,
             scrollwheel: false,
         };
         var map = new google.maps.Map(mapCanvas, mapOptions);
 
-        var userInfoWin = new google.maps.InfoWindow({content: "My location"});
+        var infoWindow = new google.maps.InfoWindow({content: "My location"});
+
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(function(position) {
+                var pos = {
+                    lat: position.coords.latitude,
+                    lng: position.coords.longitude
+                };
+                infoWindow.setPosition(pos);
+                infoWindow.setContent('Location found.');
+                map.setCenter(pos);
+                addMarkerToMap(map, "My location", pos, "user");
+            });
+        }
+
         var user_location = new google.maps.Marker({
             map: map,
-            position: user_latlng,
             title: "My location",
             icon: '/static-assets/marker_user.png'
         });
@@ -30,7 +36,7 @@ $( document ).ready(function() {
             userInfoWin.open(map, user_location);
         });
 
-        // Edit styles for map
+        // Styles for map
         map.set('styles', [
             {
                 "featureType":"water",
@@ -77,6 +83,8 @@ $( document ).ready(function() {
         var events_markers = [];
         var guilds_markers = [];
         var stores_markers = [];
+
+        // Function for adding selected markers to map
         function addMarkerToMap(map, name, latlng, type){
             var infoWin = new google.maps.InfoWindow({content: name});
             var marker;
@@ -97,7 +105,7 @@ $( document ).ready(function() {
                     icon: '/static-assets/marker_guild.png'
                 });
                 guilds_markers.push(marker);
-            } else {
+            } else if (type === 'stores') {
                 marker = new google.maps.Marker({
                     map: map,
                     position: latlng,
@@ -105,24 +113,32 @@ $( document ).ready(function() {
                     icon: '/static-assets/marker_store.png'
                 });
                 stores_markers.push(marker);
+            } else {
+                marker = new google.maps.Marker({
+                    map: map,
+                    position: latlng,
+                    title: name,
+                    icon: '/static-assets/marker_user.png'
+                });
             }
             google.maps.event.addListener(marker, 'click', function(){
                 infoWin.open(map, marker);
             });
         }
 
+        // Function used my clearMarkers()
         function setMapOnAll(map, markerslist) {
             for (var i = 0; i < markerslist.length; i++) {
                 markerslist[i].setMap(map);
             }
         }
-
+        // Clearing markers from map
         function clearMarkers(markerslist) {
             setMapOnAll(null, markerslist);
         }
 
+        // Handle showing the right markers
         function addWantedMarkers(){
-            // list of dicts
             var mappoints = {};
             if (document.getElementById('events').checked) {
                 mappoints['events'] = event_dict;
@@ -150,7 +166,6 @@ $( document ).ready(function() {
             }
 
             // go through the dict/dicts
-            console.log(mappoints);
             for (var type in mappoints) {
                 var dict = mappoints[type];
                 // for each key in dict add a marker to map
@@ -161,18 +176,12 @@ $( document ).ready(function() {
                 }
             }
         }
-
         var mappoints = [event_dict, guild_dict, store_dict];
         $( "#check_map" ).change(function() {
             addWantedMarkers();
         });
-
         addWantedMarkers();
-
     }
-
-
     // call initialize function when the page is fully loaded
     google.maps.event.addDomListener(window, 'load', initialize);
-
 });
