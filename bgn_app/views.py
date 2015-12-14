@@ -127,7 +127,7 @@ class Stores():
 
         return stores
 
-
+@login_required(login_url='/login/')
 def around_me(request):
     events = Events().get_events()
     guilds = Guilds().get_guilds()
@@ -138,8 +138,9 @@ def around_me(request):
             'events': events,
             'guilds': guilds,
             'stores': stores,
-            'user': request.user
-        }
+            # 'user': request.user
+        },
+        RequestContext(request)
     )
 
 def get_users_events(self):
