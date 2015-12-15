@@ -39,8 +39,11 @@ class Event(models.Model):
     id = models.AutoField(primary_key=True)
     name = models.CharField(max_length=200)
     venue = models.CharField(max_length=200)
+    lat = models.FloatField(default=0)
+    lon = models.FloatField(default=0)
     time = models.DateTimeField(auto_now=False, editable=True)
-    main_game = models.CharField(max_length=200)
+    main_game = models.CharField(max_length=200, blank=True)
+    img_url = models.CharField(max_length=200, blank=True)    
     description = models.TextField()
     participants = models.ManyToManyField(UserProfile, through="Participant", blank=True)
 
@@ -76,6 +79,10 @@ class Guild(models.Model):
     name = models.CharField(max_length=200)
     img_url = models.CharField(max_length=200)
     hq = models.CharField(max_length=200)
+    lat = models.FloatField(default=0)
+    lon = models.FloatField(default=0)
+    main_game = models.CharField(max_length=200, blank=True)
+    img_url = models.CharField(max_length=200, blank=True)    
     description = models.TextField()
     member = models.ManyToManyField(UserProfile, related_name="members", through="GuildMember", blank=True)
 

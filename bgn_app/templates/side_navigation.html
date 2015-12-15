@@ -21,9 +21,11 @@
       <ul id="slide-out">
         <li>
           <div class="section" style="width: 175px; text-align: center;">
-            <span class="center icon_hover"><h5 style="color: white; font-weight: 200; display: inline; margin: 5px;">{{ user.userprofile }}</h5><i class="fa fa-pencil-square-o hover_hide pull-right" style="color: white;"></i></span>
+            <span class="center icon_hover"><h5 class="user-nameplate">{{ user.userprofile }}</h5><i class="fa fa-pencil-square-o hover_hide pull-right" style="color: white;"></i></span>
             <!-- <img src="{% static 'profile_pic.png' %}" alt="" style="margin-top: 13px;" class="circle responsive-img"> -->
-            <img src="{{ user.userprofile.img_url }}" alt="" style="margin-top: 13px;" class="circle responsive-img">              
+            <div class="side-img-wrap">
+              <img src="{{ user.userprofile.img_url }}" alt="" style="margin-top: 13px;" class="circle responsive-img">
+            </div>
           </div>
         </li>
         <li>

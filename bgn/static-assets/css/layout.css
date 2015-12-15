@@ -97,6 +97,13 @@ input:-webkit-autofill:focus {
 .row .col.offset-s3 {
   margin-left: 25%;
 }
+h5.user-nameplate {
+  color: white; 
+  font-weight: 700; 
+  display: inline; 
+  margin: 5px;
+  font-size: 18px;
+}
 .side-action a {
   font-weight: normal;
   height: 54px;
@@ -106,4 +113,10 @@ input:-webkit-autofill:focus {
 }
 .side-action a:hover {
   color: #fff!important;
+}
+.side-img-wrap {
+  height: 175px;
+  width: 175px;
+  overflow: hidden;
+  border-radius: 50%;
 }
