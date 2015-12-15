@@ -17,7 +17,7 @@ class EventForm(forms.ModelForm):
     main_game = forms.MultipleChoiceField(choices=choices, initial={u'': 'Choose games'})
     time = forms.TextInput(attrs={'class': 'datetimepicker',})
     description = forms.Textarea()
-    participants = forms.ModelMultipleChoiceField(queryset=User.objects.all())
+    participants = forms.ModelMultipleChoiceField(queryset=UserProfile.objects.all())
 
     # def clean(self):
     #     return self.cleaned_data

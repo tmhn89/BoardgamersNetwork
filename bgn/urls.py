@@ -28,7 +28,8 @@ urlpatterns = [
     url(r'^events/create/$', event_create, name="event_create"),
     url(r'^guild_detail/(\d+)/$', guild_detail, name="guild_detail"),
     url(r'^event_detail/(\d+)/$', event_detail, name="event_detail"),
-    # url(r'^admin/', include(admin.site.urls)),
+    url(r'^login/$', 'django.contrib.auth.views.login'),
+    url(r'^logout/$', 'django.contrib.auth.views.logout', {'next_page': '/login/'})
 ]
 
 urlpatterns += staticfiles_urlpatterns()

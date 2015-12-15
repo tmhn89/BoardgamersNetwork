@@ -9,20 +9,34 @@
     <div class="col s10">
       <a href="/around_me/" class="text-white"> BGN</a>
     </div>
-  </div>
-  <ul id="slide-out">
-    <li>
-      <div class="section" style="width: 175px; text-align: center;">
-        <span class="center icon_hover"><h5 style="color: white; font-weight: 200; display: inline; margin: 5px;">Annika Oukka</h5><i class="fa fa-pencil-square-o hover_hide pull-right" style="color: white;"></i></span>
-        <img src="{% static 'profile_pic.png' %}" alt="" style="margin-top: 13px;" class="circle responsive-img">
+  </div>          
+      {% if user.is_anonymous %}
+      <p class="center-align white-text">BGN - Connecting players</p>
+      <div class="side-action center-align white-text">
+        <a href="{% url 'django.contrib.auth.views.login' %}" class="red-text text-lighten-1">Login</a>
+        <!-- or
+        <a href="{% url 'django.contrib.auth.views.login' %}" class="red-text text-lighten-1">Register</a -->
       </div>
-    </li>
-    <li>
-      <a href="/around_me/" class="waves-effectwaves-light" style="color:white;"><i class="material-icons">location_on</i>Helsinki, Finland</a>
-    </li>
-    <li class="bold"><a href="/events/" class="waves-effectwaves-light"><i class="fa fa-calendar" style="padding-right: 4px;"></i> My Events</a></li>
-    <li class="bold"><a href="/guilds/" class="waves-effect waves-light"><img src="{% static 'guild_icon.png' %}" style="height: 18px; width: 18px;"/> My Guilds</a></li>
-    <li class="bold"><a href="/games/" class="waves-effect waves-light"><i class="fa fa-puzzle-piece" style="padding-right: 4px;"></i> My Games</a></li>
-  <!--   <li class="bold"><a href="list_friends.html" class="waves-effect waves-teal"><i class="fa fa-users"></i> Friends</a></li> -->
-  </ul>
+      {% else %}
+      <ul id="slide-out">
+        <li>
+          <div class="section" style="width: 175px; text-align: center;">
+            <span class="center icon_hover"><h5 class="user-nameplate">{{ user.userprofile }}</h5><i class="fa fa-pencil-square-o hover_hide pull-right" style="color: white;"></i></span>
+            <!-- <img src="{% static 'profile_pic.png' %}" alt="" style="margin-top: 13px;" class="circle responsive-img"> -->
+            <div class="side-img-wrap">
+              <img src="{{ user.userprofile.img_url }}" alt="" style="margin-top: 13px;" class="circle responsive-img">
+            </div>
+          </div>
+        </li>
+        <li>
+          <a href="/around_me/" class="waves-effectwaves-light" style="color:white;"><i class="material-icons">location_on</i>{{ user.userprofile.location }}</a>
+        </li>
+        <li class="bold"><a href="/events/" class="waves-effectwaves-light"><i class="fa fa-calendar" style="padding-right: 4px;"></i> My Events</a></li>
+        <li class="bold"><a href="/guilds/" class="waves-effect waves-light"><img src="{% static 'guild_icon.png' %}" style="height: 18px; width: 18px;"/> My Guilds</a></li>
+        <li class="bold"><a href="/games/" class="waves-effect waves-light"><i class="fa fa-puzzle-piece" style="padding-right: 4px;"></i> My Games</a></li>
+      </ul>
+      <div class="auth">
+        <a href="{% url 'django.contrib.auth.views.logout' %}">Logout</a>
+      </div>
+      {% endif %}
 </div>
