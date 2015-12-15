@@ -66,7 +66,7 @@ class Participant(models.Model):
         role = '';
         if self.is_host:
             role = " (Host)";
-        return str(self.id) + " - " + self.event.name + " - " + self.user.name + role
+        return str(self.id) + " - " + self.event.name + " - " + str(self.user) + role
 
 class Guild(models.Model):
     """
@@ -95,4 +95,4 @@ class GuildMember(models.Model):
         role = '';
         if self.is_leader == True:
             role = " (Leader)";
-        return str(self.id) + " - " + self.guild.name + " - " + self.user.name + role
+        return str(self.id) + " - " + self.guild.name + " - " + str(self.user) + role
