@@ -120,3 +120,6 @@ h5.user-nameplate {
   overflow: hidden;
   border-radius: 50%;
 }
+i.material-icons {
+    vertical-align: middle;
+}

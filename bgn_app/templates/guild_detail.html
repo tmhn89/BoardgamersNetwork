@@ -24,7 +24,7 @@
               {% for leader in leaders %}
                 <div class="chip">
                   <img src="{{ leader.user.img_url }}" alt="Contact Person">
-                    {{ leader.user.name }}
+                    {{ leader.user }}
                 </div>
               {% endfor %}
             </div>
@@ -55,7 +55,7 @@
       {% for member in members %}
         <li class="collection-item avatar">
           <img src="{{ member.user.img_url }}" alt="" class="circle">
-          <span class="title">{{member.user.name}}</span>
+          <span class="title">{{member.user}}</span>
           <p>{{member.user.location}} <br>
               {{member.user.email}}
           </p>

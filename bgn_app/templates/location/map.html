@@ -55,17 +55,19 @@
     <div class="col s12 m6">
       <div class="card small blue-grey darken-1">
         <div class="card-image">
-          <img src="{{ event.image_url }}">
+          <img src="{{ event.img_url }}">
           <span id="event_name" class="card-title">{{ event.name }}</span>
         </div>
         <script type="text/javascript">
           var event_name = "{{event.name}}";
-          var event_coord = "{{event.coordinates}}";
+          // var event_coord = "[{{event.lat}},{{event.lon}}]";
 
           var list = [];
-          coordinate_list = event_coord.split(',');
-          list.push(Number(coordinate_list[0].replace('[','')));
-          list.push(Number(coordinate_list[1].replace(']','')));
+          // coordinate_list = event_coord.split(',');
+          // list.push(Number(coordinate_list[0].replace('[','')));
+          // list.push(Number(coordinate_list[1].replace(']','')));
+          list.push({{event.lat}});
+          list.push({{event.lon}});
           event_dict[event_name] = list;
 
 
@@ -73,14 +75,14 @@
             return degrees * Math.PI / 180;
           }
 
-          var list = [];
-          coordinate_list = event_coord.split(',');
+          // var list = [];
+          // coordinate_list = event_coord.split(',');
 
           // coordinates for event
-          var ev_coord_x = Number(coordinate_list[0].replace('[',''));
-          var ev_coord_y = Number(coordinate_list[1].replace(']',''));
-          list.push(ev_coord_x);
-          list.push(ev_coord_y);
+          // var ev_coord_x = Number(coordinate_list[0].replace('[',''));
+          // var ev_coord_y = Number(coordinate_list[1].replace(']',''));
+          // list.push(ev_coord_x);
+          // list.push(ev_coord_y);
 
           event_dict[event_name] = list;
 
@@ -104,8 +106,8 @@
           // console.log(d);
         </script>
         <div class="event card-content white-text">
-          <p>{{ event.address }}</p>
-          <p>{{ event.attendee_count}} people going</p>
+          <p>{{ event.location }}</p>
+          <p>{{ event.participants.all|length }} people going</p>
           <!-- <p>Game of the event is {{ event.main_game}}</p> -->
         </div>
         <div class="card-action">
@@ -127,22 +129,24 @@
     <div class="col s12 m6">
       <div class="card small blue-grey darken-1">
         <div class="card-image">
-          <img src="{{ guild.image_url }}">
+          <img src="{{ guild.img_url }}">
           <span id="guild_name" class="card-title">{{ guild.name }}</span>
         </div>
         <script type="text/javascript">
           var guild_name = "{{guild.name}}";
-          var guild_coord = "{{guild.coordinates}}";
+          // var guild_coord = "[{{guild.lat}},{{guild.lon}}]";
 
           var list = [];
-          coordinate_list = guild_coord.split(',');
-          list.push(Number(coordinate_list[0].replace('[','')));
-          list.push(Number(coordinate_list[1].replace(']','')));
+          // coordinate_list = guild_coord.split(',');
+          // list.push(Number(coordinate_list[0].replace('[','')));
+          // list.push(Number(coordinate_list[1].replace(']','')));
+          list.push({{guild.lat}});
+          list.push({{guild.lon}});
           guild_dict[guild_name] = list;
         </script>
         <div class="card-content white-text">
           <p>{{ guild.hq }}</p>
-          <p>{{ guild.members}} members</p>
+          <p>{{ guild.member.all|length }} members</p>
         </div>
         <div class="card-action">
           <a href="#">Join guild</a>

@@ -27,7 +27,7 @@
               {% for host in hosts %}
                 <div class="chip">
                   <img src="{{ host.user.img_url }}" alt="Contact Person">
-                    {{ host.user.name }}
+                    {{ host.user }}
                 </div>
               {% endfor %}
             </div>
@@ -59,16 +59,20 @@
   
   <div class="col m6">
     <ul class="collection with-header">
-      <li class="collection-header"><h4>Event Assistants</h4></li>
-      {% for member in participants %}
-        <li class="collection-item avatar">
-          <img src="{{ member.user.img_url }}" alt="" class="circle">
-          <span class="title">{{member.user.name}}</span>
-          <p>{{member.user.location}} <br>
-              {{member.user.email}}
-          </p>
-        </li>
-      {% endfor %}
+      <li class="collection-header"><h4>Event Participants</h4></li>
+      {% if participants|length > 0 %}
+        {% for member in participants %}
+          <li class="collection-item avatar">
+            <img src="{{ member.user.img_url }}" alt="" class="circle">
+            <span class="title">{{member.user}}</span>
+            <p>{{member.user.location}} <br>
+                {{member.user.email}}
+            </p>
+          </li>
+        {% endfor %}
+      {% else %}
+      <li class="collection-item">No participants</li>
+      {% endif %}
     </ul>
   </div>
 </div>

@@ -1,0 +1,24 @@
+<div class="guilds row">
+  <span style="display: flex;">
+    <h5>Guilds</h5>
+    <a style="margin-left: 14px;" class="btn-floating btn-medium waves-effect waves-light cyan accent-2 cyan"><i class="material-icons">add</i></a>
+  </span>
+  {% for guild in guilds %}
+  <div class="col s12 m6">
+    <div class="card small blue-grey darken-1">
+      <div class="card-image">
+        <img src="{{ guild.img_url }}">
+        <span id="guild_name" class="card-title">{{ guild.name }}</span>
+      </div>
+      <div class="card-content white-text">
+        <p>{{ guild.hq }}</p>
+        <p>{{ guild.member.all|length }} members</p>
+      </div>
+      <div class="card-action">
+        <a href="#">Join guild</a>
+        <a href="/guild_detail/{{ guild.id }}">See guild details</a>
+      </div>
+    </div>
+  </div>
+  {% endfor %}
+</div>

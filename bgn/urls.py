@@ -19,6 +19,7 @@ from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 from bgn_app.views import *
 
 urlpatterns = [
+    url(r'^$', around_me, name="around_me"),
     url(r'^around_me/', around_me, name="around_me"),
     url(r'^events/$', get_users_events, name="events"),
     url(r'^guilds/', get_users_guilds, name="guilds"),
