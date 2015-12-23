@@ -5,6 +5,7 @@ from django.conf import settings
 import pdb
 import re
 
+
 class UserProfile(models.Model):
     """
     Represent User entity
@@ -13,13 +14,15 @@ class UserProfile(models.Model):
         settings.AUTH_USER_MODEL,
         on_delete=models.CASCADE,
     )
-    
+
     # email = models.CharField(max_length=200)
     location = models.CharField(max_length=200)
-    img_url = models.CharField(max_length=200, blank=True)    
+    lat = models.FloatField(default=0)
+    lon = models.FloatField(default=0)
+    img_url = models.CharField(max_length=200, blank=True)
 
     def __str__(self):
-       return self.user.first_name + ' ' + self.user.last_name    
+       return self.user.first_name + ' ' + self.user.last_name
 
 class Collection(models.Model):
     """
@@ -43,7 +46,7 @@ class Event(models.Model):
     lon = models.FloatField(default=0)
     time = models.DateTimeField(auto_now=False, editable=True)
     main_game = models.CharField(max_length=200, blank=True)
-    img_url = models.CharField(max_length=200, blank=True)    
+    img_url = models.CharField(max_length=200, blank=True)
     description = models.TextField()
     participants = models.ManyToManyField(UserProfile, through="Participant", blank=True)
 
@@ -82,7 +85,7 @@ class Guild(models.Model):
     lat = models.FloatField(default=0)
     lon = models.FloatField(default=0)
     main_game = models.CharField(max_length=200, blank=True)
-    img_url = models.CharField(max_length=200, blank=True)    
+    img_url = models.CharField(max_length=200, blank=True)
     description = models.TextField()
     member = models.ManyToManyField(UserProfile, related_name="members", through="GuildMember", blank=True)
 

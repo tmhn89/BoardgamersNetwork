@@ -13,7 +13,7 @@ $( document ).ready(function() {
         var map = new google.maps.Map(mapCanvas, mapOptions);
 
         var infoWindow = new google.maps.InfoWindow({content: "My location"});
-
+        var address;
         if (navigator.geolocation) {
             navigator.geolocation.getCurrentPosition(function(position) {
                 var pos = {
@@ -22,6 +22,7 @@ $( document ).ready(function() {
                 };
                 infoWindow.setPosition(pos);
                 infoWindow.setContent('Location found.');
+
                 map.setCenter(pos);
                 addMarkerToMap(map, "My location", pos, "user");
             });

@@ -9,7 +9,10 @@ body {
 }
 h5 {
   color:white;
-  font-weight: 200;
+  padding-left: 10px;
+}
+h4 {
+  color:white;
   padding-left: 10px;
 }
 .icon_hover i.hover_hide {
@@ -62,12 +65,10 @@ ul.errorlist {
 ul.errorlist li {
   color: #ef9a9a;
 }
-.side-nav div.auth {
-  text-align: center;
-}
 .side-nav div.auth a {
   height: 24px;
-  line-height: 24px;  
+  line-height: 30px;
+  margin-left: 40px;
 }
 .side-nav div.auth a:hover {
   text-decoration: underline;
@@ -89,7 +90,7 @@ form a:hover {
   color: #ffda86;
 }
 input:-webkit-autofill,
-input:-webkit-autofill:hover, 
+input:-webkit-autofill:hover,
 input:-webkit-autofill:focus {
     -webkit-box-shadow: 0 0 0px 1000px #757171 inset!important;
     -webkit-text-fill-color: #fff !important;
@@ -98,10 +99,9 @@ input:-webkit-autofill:focus {
   margin-left: 25%;
 }
 h5.user-nameplate {
-  color: white; 
-  font-weight: 700; 
-  display: inline; 
-  margin: 5px;
+  color: white;
+  font-weight: 500;
+  display: inline;
   font-size: 18px;
 }
 .side-action a {
@@ -122,4 +122,9 @@ h5.user-nameplate {
 }
 i.material-icons {
     vertical-align: middle;
+}
+a.logotext {
+  font-weight: 200;
+  font-size: 43px;
+  margin: 0px 0px 4px 11px;
 }

@@ -1,0 +1,130 @@
+{% extends "layout.html" %}
+{% load staticfiles %}
+{% block title %} Profile {% endblock %}
+{% block content %}
+
+<script type="text/javascript">
+    $(document).ready(function() {
+        "use strict";
+
+        var show = '{{ show }}';
+        if (show == "change_password") {
+            $("#view").attr("class", "hidden");
+            $(".change_email").attr("class", "hidden change_email");
+        } else if (show == "change_email") {
+            $("#view").attr("class", "hidden");
+            $(".change_password").attr("class", "hidden change_password");
+        } else {
+            $(".change_email").attr("class", "hidden change_email");
+            $(".change_password").attr("class", "hidden change_password");
+        }
+
+
+        $(document).on( 'click', ".change_email_link", function (event) {
+            event.preventDefault();
+            $("#view").attr("class", "hidden");
+            $(".change_email").attr("class", "change_email")
+            return false;
+        });
+
+        $(document).on( 'click', ".change_password_link", function (event) {
+            event.preventDefault();
+            $("#view").attr("class", "hidden");
+            $(".change_password").attr("class", "change_password")
+            return false;
+        });
+
+        $(document).on( 'click', ".cancel_change_email", function (event) {
+            event.preventDefault();
+            $("#view").removeAttr("class", "hidden");
+            $(".change_email").load("/profile/ .change_email");
+            $(".change_email").attr("class", "change_email hidden");
+            return false;
+        });
+
+        $(document).on( 'clikc', ".cancel_change_password", function (event) {
+            event.preventDefault();
+            $("#view").removeAttr("class", "hidden");
+            $(".change_password").load("/profile/ .change_password");
+            $(".change_password").attr("class", "change_password hidden");
+            return false;
+        });
+    });
+</script>
+
+<div class="profile row">
+    <span style="display: flex;">
+      <h4>Profile</h4>
+    </span>
+    <div class="col s8" style="background-color: #524E4E; padding-top: 22px; margin-left: 20px;">
+
+      <form class="col s12" action="/edit_profile/{{ user.id }}" method="post">
+        <div class="row">
+          <div class="input-field col s6">
+            <input placeholder="{{ username }}" value="{{ username }}" id="first_name" type="text" class="validate">
+            <label for="username">Username</label>
+          </div>
+        </div>
+        <div class="row">
+          <div class="input-field col s6">
+            <input placeholder="{{ first_name }}" value="{{ first_name }}" id="first_name" type="text" class="validate">
+            <label for="first_name">First Name</label>
+          </div>
+          <div class="input-field col s6">
+            <input placeholder="{{ last_name }}" value="{{ last_name }}" id="last_name" type="text" class="validate">
+            <label for="last_name">Last Name</label>
+          </div>
+          <div class="input-field col s6">
+            <input placeholder="{{ email }}" value="{{ email }}" id="email" type="text" class="validate">
+            <label for="email">Email</label>
+          </div>
+          <div class="input-field col s6">
+            <input placeholder="{{ location }}" value="{{ location }}" id="last_name" type="text" class="validate">
+            <label for="location">Home location</label>
+          </div>
+        </div>
+        <div class="row">
+          <h6 style="margin-left: 11px;">Change password</h6>
+          <div class="input-field col s6">
+            <input placeholder="{{ password }}" value="{{ password }}" id="password" type="password" class="validate">
+            <label for="password">Password</label>
+          </div>
+          <div class="input-field col s6">
+            <input placeholder="{{ password }}" value="{{ password }}" id="password" type="password" class="validate">
+            <label for="password">Password again</label>
+          </div>
+          <div class="col s3">
+            <label for="disabled">Last logged in</label>
+            <p>{{ last_login }}</p>
+          </div>
+          <a type="submit" class="profile waves-effect waves-light btn pull-right" style="margin: 7px;">Save</a>
+          <a class="profile waves-effect waves-light btn pull-right" style="margin: 7px;">Discard</a>
+          <script type="text/javascript">
+          // Show buttons for saving or discarding if inputs modified
+            $(document).ready(function () {
+                $('.profile.btn').hide();
+                $('.profile.btn').click(function() {
+                    $('.profile.btn').hide();
+                });
+                $('input').each(function() {
+                   var elem = $(this);
+                   elem.data('oldVal', elem.val());
+                   elem.bind("change click keyup input paste", function(event){
+                      if (elem.data('oldVal') != elem.val()) {
+                        elem.data('oldVal', elem.val());
+                        $('.profile.btn').show();
+                     }
+                   });
+                });
+            });
+
+
+
+          </script>
+        </div>
+      </form>
+    </div>
+</div>
+
+
+{% endblock %}

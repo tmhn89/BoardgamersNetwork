@@ -1,15 +1,42 @@
 {% load staticfiles %}
+<script src="https://maps.googleapis.com/maps/api/js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script type="text/javascript">
+  var infoWindow = new google.maps.InfoWindow({content: "My location"});
+  var address;
+  if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(function(position) {
+          var pos = {
+              lat: position.coords.latitude,
+              lng: position.coords.longitude
+          };
+          var geocoder = new google.maps.Geocoder();
+          geocoder.geocode({'location': pos}, function(results, status) {
+              console.log(results, status);
+              if (status == "OK") {
+                console.log(results);
+                address = results[0].formatted_address;
+              } else {
+                console.log("Helsinki");
+                address = "Helsinki, Finland";
+              }
+              $('<span>' + address + '<span>').appendTo("#address");
+          });
+      });
+  }
+</script>
+
 
 <div class="side-nav fixed" style="top:0px; width: 208px; background-color: #524E4E;">
-  
+
   <div class="row valign-wrapper red">
     <div class="col s2">
       <img src="{% static 'dice_icon.png' %}" style="height: 57px; width: 52px; margin: 3px 8px 3px 0px;">
     </div>
     <div class="col s10">
-      <a href="/around_me/" class="text-white"> BGN</a>
+      <a href="/around_me/" class="logotext text-white"> BGN</a>
     </div>
-  </div>          
+  </div>
       {% if user.is_anonymous %}
       <p class="center-align white-text">BGN - Connecting players</p>
       <div class="side-action center-align white-text">
@@ -21,7 +48,7 @@
       <ul id="slide-out">
         <li>
           <div class="section" style="width: 175px; text-align: center;">
-            <span class="center icon_hover"><h5 class="user-nameplate">{{ user.userprofile }}</h5><i class="fa fa-pencil-square-o hover_hide pull-right" style="color: white;"></i></span>
+            <a href="/profile/{{ user.id }}" class="waves-effectwaves-light" style="color:white; line-height: 120%; height: 35px !important;"><span class="center icon_hover"><h5 class="user-nameplate">{{ user.userprofile }}</h5><i class="fa fa-pencil-square-o hover_hide pull-right" style="color: white;"></i></span></a>
             <!-- <img src="{% static 'profile_pic.png' %}" alt="" style="margin-top: 13px;" class="circle responsive-img"> -->
             <div class="side-img-wrap">
               <img src="{{ user.userprofile.img_url }}" alt="" style="margin-top: 13px;" class="circle responsive-img">
@@ -29,14 +56,15 @@
           </div>
         </li>
         <li>
-          <a href="/around_me/" class="waves-effectwaves-light" style="color:white;"><i class="material-icons">location_on</i>{{ user.userprofile.location }}</a>
+          <i class="material-icons" style="position: absolute; color: white;">location_on</i><a href="/around_me/" id="address" class="waves-effectwaves-light" style="color:white; line-height: 120%; margin-left: 14px"></a>
         </li>
         <li class="bold"><a href="/events/" class="waves-effectwaves-light"><i class="fa fa-calendar" style="padding-right: 4px;"></i> My Events</a></li>
         <li class="bold"><a href="/guilds/" class="waves-effect waves-light"><img src="{% static 'guild_icon.png' %}" style="height: 18px; width: 18px;"/> My Guilds</a></li>
         <li class="bold"><a href="/games/" class="waves-effect waves-light"><i class="fa fa-puzzle-piece" style="padding-right: 4px;"></i> My Games</a></li>
       </ul>
       <div class="auth">
-        <a href="{% url 'django.contrib.auth.views.logout' %}">Logout</a>
+        <a href="{% url 'django.contrib.auth.views.logout' %}">Logout <i class="tiny material-icons">input</i></a>
       </div>
       {% endif %}
+  </ul>
 </div>

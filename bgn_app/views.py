@@ -127,6 +127,7 @@ class Stores():
 
         return stores
 
+
 @login_required(login_url='/login/')
 def around_me(request):
     # events = Events().get_events()
@@ -145,108 +146,28 @@ def around_me(request):
         RequestContext(request)
     )
 
-def get_users_events(request):
-        # Function for retrieveing all users events
 
-        # events = [
-        #     {
-        #         'id': 1,
-        #         'name': 'GameDay',
-        #         'coordinates': [60.18775, 24.82846],
-        #         'address': 'Jamerantaival 1',
-        #         'image_url': 'https://theromanticvineyard.files.wordpress.com/2013/01/clue-board.jpg',
-        #         'attendee_count': 9,
-        #         'description': 'Lorem ipsum dolor sit amet, non numquam proinmae.',
-        #         'main_game': 'Game of Thrones'
-        #     },
-        #     {
-        #         'id': 2,
-        #         'name': 'Otaniemi Gaming Night',
-        #         'coordinates': [60.18345, 24.78526],
-        #         'address': 'Otakaari 20',
-        #         'image_url': 'http://d1mvvfdyo8jq4k.cloudfront.net/media/susd/images/2013/7/28/c6138082f7ce11e28594f23c91709c91_1375047823.jpg',
-        #         'attendee_count': 16,
-        #         'description': 'Lorem ipsum dolor sit amet, non numquam proinmae.',
-        #         'main_game': 'Kimble'
-        #     },
-        #     {
-        #         'id': 3,
-        #         'name': 'Dominion',
-        #         'coordinates': [60.16899, 24.94938],
-        #         'address': 'Konemiehentie 1',
-        #         'image_url': 'http://thisisinfamous.com/wp-content/uploads/2014/06/dominion-1.jpg',
-        #         'attendee_count': 4,
-        #         'description': 'Lorem ipsum dolor sit amet, non numquam proinmae.',
-        #         'main_game': 'Dominion'
-        #     },
-        # ]
+def get_users_events(request):
         events = Event.objects.all()
 
         return render_to_response(
             'events/list_events.html', {
                 'events': events,
-            }, 
+            },
             RequestContext(request)
         )
 
 
 def get_users_guilds(request):
-
-    # guilds = [
-    #     {
-    #         'id': 1,
-    #         'name': 'Best Guild',
-    #         'coordinates': [60.18008, 24.81382],
-    #         'hq': 'Mantyviita 3',
-    #         'image_url': 'http://www.blogcdn.com/wow.joystiq.com/media/2011/04/guild-fireworks-larger.jpg',
-    #         'members': 4,
-    #         'description': 'Lorem ipsum dolor sit amet, non numquam proinmae.'
-    #     },
-    #     {
-    #         'id': 2,
-    #         'name': 'Big Guild',
-    #         'coordinates': [60.172190, 24.947443],
-    #         'hq': 'Other address',
-    #         'image_url': 'http://i.imgur.com/Amf3T7i.png',
-    #         'members': 10,
-    #         'description': 'Lorem ipsum dolor sit amet, non numquam proinmae.'
-    #     },
-    #     {
-    #         'id': 3,
-    #         'name': 'Old Guild',
-    #         'coordinates': [60.16898, 24.94948],
-    #         'hq': 'Some address',
-    #         'image_url': 'https://upload.wikimedia.org/wikipedia/commons/9/95/Rembrandt_-_De_Staalmeesters-_het_college_van_staalmeesters_(waardijns)_van_het_Amsterdamse_lakenbereidersgilde_-_Google_Art_Project.jpg',
-    #         'members': 48,
-    #         'description': 'Lorem ipsum dolor sit amet, non numquam proinmae.'
-    #     },
-    # ]
-
     guilds = Guild.objects.all()
 
     return render_to_response(
         'guilds/list_guilds.html', {
             'guilds': guilds,
-        }, 
+        },
         RequestContext(request)
     )
 
-
-
-
-@login_required
-def list_of_user_matches(self, request, user_id):
-    """
-    List user's matches. Matches are people who share
-    the same interests and nearby location with the user
-    """
-
-    # return render_to_response(
-    #     'templates/friends/list_user_matches.html', {
-    #         'friend_list': resp
-    #     }
-    # )
-    pass
 
 def users(request):
     users = UserProfile.objects.order_by('-name')[:5]
@@ -271,6 +192,7 @@ def users(request):
 
     return HttpResponse(template.render(context))
 
+
 def games(request):
     # games = User.objects.order_by('-name')[:3]
 
@@ -291,6 +213,7 @@ def games(request):
 
     return HttpResponse(template.render(context))
 
+
 def guild_detail(request, guild_id):
     guild_id = 1
     guild = Guild.objects.get(id=guild_id)
@@ -308,6 +231,7 @@ def guild_detail(request, guild_id):
 
     return HttpResponse(template.render(context))
 
+
 def event_detail(request, event_id):
     event = Event.objects.get(id=event_id)
     hosts = Participant.objects.filter(is_host=True).filter(event=event_id)
@@ -322,9 +246,10 @@ def event_detail(request, event_id):
 
     return HttpResponse(template.render(context))
 
+
 def event_create(request):
     if request.method == "POST":
-        form = EventForm(request.POST)        
+        form = EventForm(request.POST)
         if form.is_valid():
             games = request.POST['main_game']
             post = form.save(commit=False)
@@ -333,3 +258,22 @@ def event_create(request):
     else:
         form = EventForm()
     return render(request, 'event_create.html', {'form': form } )
+
+
+def profile_info(request, user_id):
+    user_profile = UserProfile.objects.get(id=user_id)
+    user = user_profile.user
+    template = loader.get_template('user_profile/profile.html')
+    context = RequestContext(request, {
+        'username': user.username,
+        'first_name': user.first_name,
+        'last_name': user.last_name,
+        'email': user.email,
+        'last_login': user.last_login,
+        'date_joined': user.date_joined,
+        'location': user_profile.location,
+        'lat': user_profile.lat,
+        'lng': user_profile.lon
+    })
+
+    return HttpResponse(template.render(context))
