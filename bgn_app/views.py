@@ -2,16 +2,14 @@ from django.http import HttpResponse
 from django.shortcuts import render_to_response, render, redirect
 from django.template import RequestContext, loader
 from django.contrib.auth.decorators import login_required
-from django.core.serializers import serialize
+from django.contrib.auth.models import User
 from .models import UserProfile, Event, Participant, Guild, GuildMember
-import json as simplejson
 
-import string
 import requests
 import xmltodict
 from .models import *
 from .forms import *
-import pdb
+
 
 class Events():
 
@@ -263,9 +261,8 @@ def event_create(request):
 def profile_info(request):
     print request.user
     print request.user.id
-    user_profile = UserProfile.objects.get(id=request.user.id)
-    print user_profile
-    user = user_profile.user
+    user = User.objects.get(id=request.user.id)
+    user_profile = user.userprofile
     template = loader.get_template('user_profile/profile.html')
     context = RequestContext(request, {
         'username': user.username,
