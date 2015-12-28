@@ -260,8 +260,11 @@ def event_create(request):
     return render(request, 'event_create.html', {'form': form } )
 
 
-def profile_info(request, user_id):
-    user_profile = UserProfile.objects.get(id=user_id)
+def profile_info(request):
+    print request.user
+    print request.user.id
+    user_profile = UserProfile.objects.get(id=request.user.id)
+    print user_profile
     user = user_profile.user
     template = loader.get_template('user_profile/profile.html')
     context = RequestContext(request, {
@@ -275,5 +278,18 @@ def profile_info(request, user_id):
         'lat': user_profile.lat,
         'lng': user_profile.lon
     })
-
     return HttpResponse(template.render(context))
+
+
+def update_profile(request):
+    args = {}
+    if request.method == 'POST':
+        form = UpdateUserProfile(request.POST, instance=request.user)
+        if form.is_valid():
+            form.save()
+            return HttpResponseRedirect(reverse('update_profile_success'))
+    else:
+        form = UpdateUserProfile()
+
+    args['form'] = form
+    return render(request, 'user_profile/profile.html', args)

@@ -31,7 +31,8 @@ urlpatterns = [
     url(r'^event_detail/(\d+)/$', event_detail, name="event_detail"),
     url(r'^login/$', 'django.contrib.auth.views.login'),
     url(r'^logout/$', 'django.contrib.auth.views.logout', {'next_page': '/login/'}),
-    url(r'^profile/(\d+)/$', profile_info, name="profile"),
+    url(r'^profile/$', profile_info, name="profile"),
+    url(r'^update_profile/$', update_profile, name="update_profile"),
 ]
 
 urlpatterns += staticfiles_urlpatterns()
