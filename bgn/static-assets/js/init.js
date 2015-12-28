@@ -11,6 +11,10 @@
       $container.masonry('layout');
     });
 
+    $('a.comingsoon').click(function() {
+        alert('Coming soon');
+    });
+
     $('select').material_select();
     $('#id_time').pickadate({        
         format: 'mm/dd/yyyy',

@@ -3,6 +3,8 @@ from django.shortcuts import render_to_response, render, redirect
 from django.template import RequestContext, loader
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
+from django.contrib.auth.views import login
+from django.core.serializers import serialize
 from .models import UserProfile, Event, Participant, Guild, GuildMember
 
 import requests
@@ -247,20 +249,26 @@ def event_detail(request, event_id):
 
 def event_create(request):
     if request.method == "POST":
-        form = EventForm(request.POST)
+        form = EventForm(request.POST, user=request.user)
         if form.is_valid():
             games = request.POST['main_game']
-            post = form.save(commit=False)
-            post.save()
-            return redirect('event_detail', post.pk)
+            event = form.save(commit=False)
+            event.save()
+
+            # add host
+            Participant.objects.create(user=request.user.userprofile, event=event, is_host=True)
+
+            for participant in form.cleaned_data['participants']:
+                Participant.objects.create(user=participant, event=event, is_host=False)
+            
+            # add participant & host with event pk
+            return redirect('event_detail', event.pk)
     else:
-        form = EventForm()
+        form = EventForm(user=request.user)
     return render(request, 'event_create.html', {'form': form } )
 
 
 def profile_info(request):
-    print request.user
-    print request.user.id
     user = User.objects.get(id=request.user.id)
     user_profile = user.userprofile
     template = loader.get_template('user_profile/profile.html')
@@ -277,7 +285,6 @@ def profile_info(request):
     })
     return HttpResponse(template.render(context))
 
-
 def update_profile(request):
     args = {}
     if request.method == 'POST':
@@ -290,3 +297,9 @@ def update_profile(request):
 
     args['form'] = form
     return render(request, 'user_profile/profile.html', args)
+    
+def bgn_login(request, **kwargs):
+    if request.user.is_authenticated():
+        return redirect('/around_me')
+    else:
+        return login(request, **kwargs)

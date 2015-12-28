@@ -2,7 +2,7 @@
 
 {% block content %}
 
-<form method="post" action="{% url 'django.contrib.auth.views.login' %}" id="login_form">
+<form method="post" action="{% url 'login' %}" id="login_form">
     {% csrf_token %}
 
     <h3 class="title">Login</h3>

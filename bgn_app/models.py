@@ -51,10 +51,17 @@ class Event(models.Model):
     participants = models.ManyToManyField(UserProfile, through="Participant", blank=True)
 
     def get_games(self):
-        # games = self.main_game[1:-1]
-        # games = re.sub('\'', '', games)
-        # return games
-        return self.main_game
+        games = self.main_game[1:-1].replace("'", "").replace(", ", ",").split(',')        
+        game_list = []
+
+        for game in games:
+            if game == '0':
+                game_list.append({'id': game, 'name': '(All games are welcomed)'})
+            else:
+                parts = game.split(':')
+                game_list.append({'id': parts[0], 'name': parts[1]})
+
+        return game_list
 
     def __str__(self):
        return str(self.id) + ' - ' + self.name

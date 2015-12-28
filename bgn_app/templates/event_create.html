@@ -12,22 +12,46 @@
         <label class="active" for="{{ form.name.id_for_label }}">Event name:</label>
       </div>
       <div class="input-field col s6">
-        {{ form.venue.errors }}
-        {{ form.venue }}
-        <label for="{{ form.venue.id_for_label }}">Event venue:</label>
-      </div>
-    </div>
-    <div class="row">
-      <div class="input-field col s6">
         {{ form.time.errors }}
         {{ form.time }}        
         <label for="{{ form.time.id_for_label }}">Event date:</label>
       </div>
+    </div>
+    <div class="row">
       <div class="input-field col s6">
-        {{ form.main_game.errors }}
-        {{ form.main_game }}
-        <label for="{{ form.main_game.id_for_label }}">Main games:</label>
+        {{ form.venue.errors }}
+        {{ form.venue }}
+        <label for="{{ form.venue.id_for_label }}">Event venue:</label>
       </div>
+      <div class="input-field col s3">
+        {{ form.lat.errors }}
+        {{ form.lat }}
+        <label for="{{ form.lat.id_for_label }}">Latitude:</label>
+      </div>
+      <div class="input-field col s3">
+        {{ form.lon.errors }}
+        {{ form.lon }}
+        <label for="{{ form.lon.id_for_label }}">Longitude:</label>
+      </div>
+    </div>
+    <div class="row">
+        <div class="input-field col s6">
+          {{ form.main_game.errors }}
+          {{ form.main_game }}
+          <label for="{{ form.main_game.id_for_label }}">Main games:</label>
+        </div>
+        <div class="input-field col s6">
+          {{ form.participants.errors }}
+          {{ form.participants }}
+          <label for="{{ form.participant.id_for_label }}">Participants:</label>
+        </div>
+    </div>
+    <div class="row">
+       <div class="input-field col s12">
+          {{ form.img_url.errors }}
+          {{ form.img_url }}
+          <label for="{{ form.description.id_for_label }}">Feature image URL:</label>
+        </div>
     </div>
     <div class="row">
        <div class="input-field col s12">
@@ -36,13 +60,6 @@
           <label for="{{ form.description.id_for_label }}">Description:</label>
         </div>
     </div>
-    <div class="row">
-        <div class="input-field col s12">
-          {{ form.participants.errors }}
-          {{ form.participants }}
-          <label for="{{ form.participant.id_for_label }}">Participants</label>
-        </div>
-    </div>        
 
     <div class="row center-align">
       <button type="submit" class="save btn btn-default">Create Event</button>
