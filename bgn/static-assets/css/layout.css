@@ -5,7 +5,10 @@ h1,h2,h3,h4,h5 {
   font-weight: 100; 
 }
 a {
-  color: white;
+  color: #F44336;
+}
+a.in-content:hover {
+  text-decoration: underline;
 }
 body {
   background-color: #757171;
@@ -139,4 +142,7 @@ a.logotext {
 }
 .no-mg-top {
   margin-top: 0;
+}
+ul {
+  -webkit-margin-before: 0;
 }

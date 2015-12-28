@@ -18,7 +18,15 @@
           <h6>Description</h6>
           <p>{{ event_detail.description }}</p> 
           <h6>Games playing</h6>
-          <p>{{ event_detail.get_games }}</p>
+          <ul style="padding-left: 20px">
+            {% for game in event_detail.get_games %}
+              {% if game.id == '0' %}
+                <li><a href="https://boardgamegeek.com/browse/boardgame/" target="_blank" class="in-content">{{game.name}}</a></li>
+              {% else %}
+                <li><a href="https://boardgamegeek.com/boardgame/{{game.id}}" target="_blank" class="in-content">{{game.name}}</a></li>
+              {% endif %}            
+            {% endfor %}
+          </ul>
         </div>
         <div class="col s12 m6">
           <div class="card-panel teal">

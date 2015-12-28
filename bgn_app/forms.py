@@ -13,7 +13,7 @@ class EventForm(forms.ModelForm):
     """
     Form for creating event
     """
-    choices = [('0', 'All games are welcomed'), ('15987', 'Arkham Horror'), ('166372', 'Artificium'), ('3955', 'Bang'), ('13', 'Catan'), ('131357', 'Coup'), ('178900', 'Codenames'), ('9446', 'Blue Moon'), ('150376','Dead of Winter'), ('1927', 'Munchkin'), ('125548', 'Pixel Tactics'), ('41114', 'The Resistance'), ('925', 'Werewolf')]
+    choices = [('0', 'All games are welcomed'), ('15987:Arkham Horror', 'Arkham Horror'), ('166372:Artificium', 'Artificium'), ('3955:Bang', 'Bang'), ('13:Catan', 'Catan'), ('131357:Coup', 'Coup'), ('178900:Codenames', 'Codenames'), ('9446:Blue Moon', 'Blue Moon'), ('150376:Dead of Winter','Dead of Winter'), ('1927:Dead of Winter', 'Munchkin'), ('125548:Pixel Tactics', 'Pixel Tactics'), ('41114:The Resistance', 'The Resistance'), ('925:Werewolf', 'Werewolf')]
     main_game = forms.MultipleChoiceField(choices=choices, initial={'0': 'All games are welcomed'}, required=False)
     time = forms.TextInput(attrs={'class': 'datetimepicker',})
     description = forms.Textarea()
@@ -26,7 +26,6 @@ class EventForm(forms.ModelForm):
          self.user = kwargs.pop('user', None)
          super(EventForm, self).__init__(*args, **kwargs)
          self.fields['participants'].queryset = self.fields['participants'].queryset.exclude(id=self.user.userprofile.id)
-
 
     class Meta:
         model = Event
