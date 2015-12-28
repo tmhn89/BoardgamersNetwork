@@ -40,9 +40,8 @@
       {% if user.is_anonymous %}
       <p class="center-align white-text">BGN - Connecting players</p>
       <div class="side-action center-align white-text">
-        <a href="{% url 'django.contrib.auth.views.login' %}" class="red-text text-lighten-1">Login</a>
-        <!-- or
-        <a href="{% url 'django.contrib.auth.views.login' %}" class="red-text text-lighten-1">Register</a -->
+        <a href="{% url 'login' %}" class="red-text text-lighten-1">Login</a>
+        
       </div>
       {% else %}
       <ul id="slide-out">

@@ -2,6 +2,7 @@ from django.http import HttpResponse
 from django.shortcuts import render_to_response, render, redirect
 from django.template import RequestContext, loader
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.views import login
 from django.core.serializers import serialize
 from .models import UserProfile, Event, Participant, Guild, GuildMember
 import json as simplejson
@@ -249,14 +250,22 @@ def event_detail(request, event_id):
 
 def event_create(request):
     if request.method == "POST":
-        form = EventForm(request.POST)
+        form = EventForm(request.POST, user=request.user)
         if form.is_valid():
             games = request.POST['main_game']
-            post = form.save(commit=False)
-            post.save()
-            return redirect('event_detail', post.pk)
+            event = form.save(commit=False)
+            event.save()
+
+            # add host
+            Participant.objects.create(user=request.user.userprofile, event=event, is_host=True)
+
+            for participant in form.cleaned_data['participants']:
+                Participant.objects.create(user=participant, event=event, is_host=False)
+            
+            # add participant & host with event pk
+            return redirect('event_detail', event.pk)
     else:
-        form = EventForm()
+        form = EventForm(user=request.user)
     return render(request, 'event_create.html', {'form': form } )
 
 
@@ -277,3 +286,9 @@ def profile_info(request, user_id):
     })
 
     return HttpResponse(template.render(context))
+
+def bgn_login(request, **kwargs):
+    if request.user.is_authenticated():
+        return redirect('/around_me')
+    else:
+        return login(request, **kwargs)

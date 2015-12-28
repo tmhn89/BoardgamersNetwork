@@ -77,28 +77,19 @@ WSGI_APPLICATION = 'bgn.wsgi.application'
 # https://docs.djangoproject.com/en/1.8/ref/settings/#databases
 
 DATABASES = {
-    # 'default': {
-    #     'ENGINE': 'django.db.backends.sqlite3',
-    #     'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-    # }
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+    }
 
     # 'default': {
     #     'ENGINE': 'django.db.backends.postgresql_psycopg2',
-    #     'NAME': 'ddvts93ntgqcka',        
-    #     'USER': 'lzixsqhroggqfa',
-    #     'PASSWORD': '0mT1g-aXpVnoNFNuE4SE-PB1fP',
-    #     'HOST': 'ec2-107-21-223-72.compute-1.amazonaws.com',
+    #     'NAME': 'd4j01l2417m6bs',        
+    #     'USER': 'fdiclnmsvhmnda',
+    #     'PASSWORD': '1IN5Wbfh7PKgV3oG6hAz6oJuLI',
+    #     'HOST': 'ec2-54-83-20-177.compute-1.amazonaws.com',
     #     'PORT': '5432',                      # Set to empty string for default.
     # }
-
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'd4j01l2417m6bs',        
-        'USER': 'fdiclnmsvhmnda',
-        'PASSWORD': '1IN5Wbfh7PKgV3oG6hAz6oJuLI',
-        'HOST': 'ec2-54-83-20-177.compute-1.amazonaws.com',
-        'PORT': '5432',                      # Set to empty string for default.
-    }
 }
 
 

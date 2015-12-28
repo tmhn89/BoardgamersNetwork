@@ -1,5 +1,8 @@
 html {
-  font-weight: 200;
+  font-weight: 300;
+}
+h1,h2,h3,h4,h5 {
+  font-weight: 100; 
 }
 a {
   color: white;
@@ -14,6 +17,9 @@ h5 {
 h4 {
   color:white;
   padding-left: 10px;
+}
+h4.white-bg {
+  color:#333333;
 }
 .icon_hover i.hover_hide {
   visibility:hidden;
@@ -42,6 +48,9 @@ h4 {
   /*Ninh: temporary set height of card-image. remove this after applying masonry effect*/
   /*height: 225px;
   overflow: hidden;*/
+}
+.card .card-action {
+  font-weight: bold;
 }
 form * {
   color: #fff;
@@ -127,4 +136,7 @@ a.logotext {
   font-weight: 200;
   font-size: 43px;
   margin: 0px 0px 4px 11px;
+}
+.no-mg-top {
+  margin-top: 0;
 }
